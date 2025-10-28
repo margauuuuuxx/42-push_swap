@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:21 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/24 14:24:00 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/28 11:59:16 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,16 @@ int main(int argc, char **argv)
 {
     Stack   a;
     Stack   b;
-    size_t  capacity;
 
-    if (argc < 2)
-        return (1);
-    if (argc == 2)
-        capacity = ft_strlen(argv[1]);
-    else 
-        capacity = argc - 1; 
-    if (!init_stack(&a, capacity) || !init_stack(&b, capacity))
-    {
-        DEBUG_LOG("%sError: %sMalloc failure in init_stacks", RED, RESET);
+    if (argc < 2) {
+        output_message("Error: Please submit at least one argument ...");
         return (1);
     }
-    if (!parse(&a, argc, argv))
+    if (!parse(&a, &b, argc, argv))
     {
-        DEBUG_LOG("%sError: %sParsing", RED, RESET);
+        output_message("Error: Invalid character in argument ...");
         return (1);
     }
-    sort(&a, &b);
+    //sort(&a, &b);
     return (0);
 }

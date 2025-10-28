@@ -6,13 +6,39 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:15:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/24 14:23:55 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/28 11:52:03 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-size_t  ft_strlen(char *str) 
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	is_neg;
+	int	res;
+
+	i = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+		is_neg = -1;
+	else
+		is_neg = 1;
+	if (is_neg == -1 || str[i] == '+')
+		i++;
+	res = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (res * 10) + (str[i++] - '0');
+		if (sizeof(res) >= sizeof(long long))
+			return (-1);
+	}
+	return (res * is_neg);
+}
+
+size_t  ft_strlen(char *str)
 {
     int i;
 
@@ -20,4 +46,12 @@ size_t  ft_strlen(char *str)
     while (str[i])
         i++;
     return (i);
+}
+
+void	output_message(char *str) {
+	size_t len;
+
+	len = ft_strlen(str);
+	if (!write(2, str, len))
+		return;
 }

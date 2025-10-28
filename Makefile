@@ -3,9 +3,9 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
 INCLUDES	= -I includes -I printf/includes -I printf/libft
 
-SRCS 		= 
+SRCS 		=	srcs/main.c \
+				srcs/parsing.c srcs/split.c srcs/stack_operations.c srcs/stack_utils.c srcs/utils.c
 
-OBJS		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # NAME_BONUS      = checker
 # SRCS_BONUS      = srcs/checker/main_bonus.c \
@@ -17,8 +17,8 @@ OBJS		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(PRINTF_LIB) $(OBJS)
-	@echo -e "\033[32mCompiling push_swap...\033[0m"
+$(NAME): $(OBJS)
+	@echo -e "Compiling push_swap..."
 	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME)
 	@echo -e "\033[32mDone!\033[0m"
 
@@ -32,13 +32,13 @@ $(OBJDIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@echo -e "\033[31mCleaning objects...\033[0m"
+	@echo -e "Cleaning objects..."
 	@rm -rf $(OBJDIR)
-# @rm -f $(NAME) $(NAME_BONUS)
 
 fclean: clean
-	@echo -e "\033[31mFull cleaning...\033[0m"
-	@echo -e "\033[31mDone!\033[0m"
+	@rm -f $(NAME)
+	@echo -e "Full cleaning..."
+	@echo -e "\033[32mDone!\033[0m"
 
 re: fclean all
 
