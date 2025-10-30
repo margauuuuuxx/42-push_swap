@@ -20,12 +20,12 @@ int main(int argc, char **argv)
     Stack   b;
 
     if (argc < 2) {
-        output_message("Error: Please submit at least one argument ...");
+        output_message("Error: Please submit at least one argument ...\n");
         return (1);
     }
     if (!parse(&a, &b, argc, argv))
     {
-        output_message("Error: Invalid character in argument ...");
+        output_message("Error: Invalid character in argument ...\n");
         return (1);
     }
     //sort(&a, &b);
