@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:21:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/28 11:59:48 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/31 09:28:03 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@ static size_t   split_len(char **str) {
     return (i);
 }
 
-static bool is_valid(char **str, Stack *s) 
+static bool is_valid(char **str, Stack *s, size_t len) 
 {
     int i;
     int j;
     int count;
     
-    i = 0;
-    while (str[i]) {
-        j = 0;
+    i = len - 1;
+    while (i >= 0) {
+        j = ft_strlen(str[i]) - 1;
         count = 0;
-        while (str[i][j]) {
+        while (j >= 0) {
             if (((str[i][j] < '0' || str[i][j] > '9') 
                 && (str[i][j] != '+' && str[i][j] != '-'))
                 || count > 1)
                 return (false);
             if (str[i][j] == '+' || str[i][j] == '-') {
-                if (j != 0 || !str[i][j + 1])
+                if (j != 0)
                     return (false);
                 count++;
             }
-            j++;
+            j--;
         }
         push(s, ft_atoi(str[i]));
-        i++;
+        i--;
     }
     return (true);
 }
@@ -52,20 +52,20 @@ static bool is_valid(char **str, Stack *s)
 bool    parse(Stack *a, Stack *b, int argc, char **argv)
 {
     char    **split_str;
-    int     capacity;
+    size_t  capacity;
 
     if (argc == 2) {
         split_str = ft_split(argv[1], ' ');
-        capacity = argc - 1;
+        capacity = split_len(split_str);
     }
     else {
-        split_str = argv;
-        capacity = split_len(split_str);
+        split_str = &argv[1];
+        capacity = argc - 1;
     }
     if (!init_stack(a, capacity) || !init_stack(b, capacity))
     {
         DEBUG_LOG("%sError: %sMalloc failure in init_stacks", RED, RESET);
         return (1);
     }
-    return (is_valid(split_str, a));
+    return (is_valid(split_str, a, capacity));
 }

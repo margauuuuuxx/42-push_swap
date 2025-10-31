@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/28 11:57:47 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/31 09:34:24 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ char	**ft_split(char const *s, char c);
 
 // ***** stack operations *****
 void    push(Stack *s, int value);
+void    pop(Stack *s);
+int top(Stack *s);
 
 // ***** stack utils *****
 int init_stack(Stack *s, int capacity);
 
-// ***** stack utils *****
+// ***** utils *****
 int     ft_atoi(const char *str);
 size_t  ft_strlen(char *str);
 void	output_message(char *str);
+void	print_stack(Stack *s);
+

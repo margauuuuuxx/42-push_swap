@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:15:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/28 11:52:03 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/31 09:38:40 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,13 @@ void	output_message(char *str) {
 	len = ft_strlen(str);
 	if (!write(2, str, len))
 		return;
+}
+
+void	print_stack(Stack *s) {
+	DEBUG_LOG("Top");
+	while (s->top > -1) {
+		DEBUG_LOG("\t%d ", top(s));
+		pop(s);
+	}
+	DEBUG_LOG("Bottom");
 }
