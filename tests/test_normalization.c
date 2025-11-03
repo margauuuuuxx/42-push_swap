@@ -20,7 +20,7 @@ void test_basic_normalization(void)
     TEST_START("Basic Normalization");
     
     t_stack a;
-    init_t_stack(&a, 5);
+    init_stack(&a, 5);
     
     push(&a, 42);
     push(&a, -7);
@@ -46,7 +46,7 @@ void test_already_sorted(void)
     TEST_START("Already Sorted Array");
     
     t_stack a;
-    init_t_stack(&a, 3);
+    init_stack(&a, 3);
     
     push(&a, 1);
     push(&a, 2);
@@ -66,7 +66,7 @@ void test_reverse_sorted(void)
     TEST_START("Reverse Sorted Array");
     
     t_stack a;
-    init_t_stack(&a, 3);
+    init_stack(&a, 3);
     
     push(&a, 3);
     push(&a, 2);
@@ -87,14 +87,14 @@ void test_edge_cases(void)
     
     t_stack a;
     
-    init_t_stack(&a, 1);
+    init_stack(&a, 1);
     push(&a, 42);
     compress(&a);
     ASSERT_EQ(a.indices[0], 0, "Single element maps to 0");
     free(a.values);
     free(a.indices);
     
-    init_t_stack(&a, 3);
+    init_stack(&a, 3);
     push(&a, -2147483648);
     push(&a, 0);
     push(&a, 2147483647);
@@ -110,7 +110,7 @@ void test_negative_numbers(void)
     TEST_START("Negative Numbers");
     
     t_stack a;
-    init_t_stack(&a, 4);
+    init_stack(&a, 4);
     
     push(&a, -25);
     push(&a, -50);
@@ -131,7 +131,7 @@ void test_large_dataset(void)
     TEST_START("Large Dataset (100 elements)");
     
     t_stack a;
-    init_t_stack(&a, 100);
+    init_stack(&a, 100);
     
     int i = 99;
     while (i >= 0)

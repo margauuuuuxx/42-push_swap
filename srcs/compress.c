@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coordinate_compression.c                           :+:      :+:    :+:   */
+/*   compress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:39:23 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/03 11:26:35 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:58:05 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void    merge(int *arr, int *temp, t_merge *m)
         arr[k++] = temp[j++];
 }
 
-static void    merge_sort(int *arr, int *temp, int left, int right) 
+void    merge_sort(int *arr, int *temp, int left, int right) 
 {
     t_merge m;
     int     mid;
@@ -57,7 +57,7 @@ static void    merge_sort(int *arr, int *temp, int left, int right)
     }
 }
 
-static int binary_search(int *sorted, int size, int target)
+int binary_search(int *sorted, int size, int target)
 {
     t_merge m;
 
@@ -94,9 +94,6 @@ void    compress(t_stack *a)
     int *cpy;
     int *sorted;
 
-    a->indices = malloc(a->capacity * sizeof(int));
-    if (!a->indices)
-        return;
     cpy = malloc(a->capacity * sizeof(int));
     sorted = malloc(a->capacity * sizeof(int));
     if (!cpy || !sorted)

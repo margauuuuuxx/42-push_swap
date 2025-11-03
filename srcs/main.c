@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:21 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/03 11:28:01 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/03 12:04:41 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int argc, char **argv)
         return (1);
     }
     compress(&a);
+    calculate_lis(&a);
     //sort(&a, &b);
     return (0);
 }

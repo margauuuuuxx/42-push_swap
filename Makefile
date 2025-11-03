@@ -4,12 +4,13 @@ CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
 INCLUDES	= -I includes -I printf/includes -I printf/libft
 
 SRCS 		=	srcs/main.c \
-				srcs/parsing.c srcs/split.c srcs/stack_operations.c srcs/stack_utils.c srcs/utils.c \
-				srcs/coordinate_compression.c
+				srcs/compress.c srcs/lis.c \
+				srcs/parsing.c srcs/split.c srcs/stack_operations.c srcs/stack_utils.c srcs/utils.c
 
 # Test configuration
 TEST_DIR	= tests
-TEST_SRCS	= $(wildcard $(TEST_DIR)/test_*.c)
+# SUPPRESS WILDCARD
+TEST_SRCS	= $(wildcard $(TEST_DIR)/test_*.c) 
 TEST_BINS	= $(TEST_SRCS:$(TEST_DIR)/%.c=$(TEST_DIR)/%)
 TEST_OBJS	= $(filter-out $(OBJDIR)/srcs/main.o, $(OBJS))
 

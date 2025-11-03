@@ -20,7 +20,7 @@ void test_push_pop(void)
     TEST_START("Push and Pop Operations");
     
     t_stack s;
-    init_t_stack(&s, 5);
+    init_stack(&s, 5);
     
     ASSERT_EQ(s.top, -1, "Stack starts empty (top = -1)");
     
@@ -44,7 +44,7 @@ void test_stack_top(void)
     TEST_START("Stack Top Function");
     
     t_stack s;
-    init_t_stack(&s, 5);
+    init_stack(&s, 5);
     
     ASSERT_EQ(top(&s), -1, "Empty stack returns -1");
     
@@ -65,7 +65,7 @@ void test_stack_overflow(void)
     TEST_START("Stack Overflow Protection");
     
     t_stack s;
-    init_t_stack(&s, 2);
+    init_stack(&s, 2);
     
     push(&s, 1);
     push(&s, 2);
@@ -83,7 +83,7 @@ void test_stack_underflow(void)
     TEST_START("Stack Underflow Protection");
     
     t_stack s;
-    init_t_stack(&s, 5);
+    init_stack(&s, 5);
     
     pop(&s);
     ASSERT_EQ(s.top, -1, "Pop on empty stack keeps top at -1");
@@ -101,7 +101,7 @@ void test_multiple_operations(void)
     TEST_START("Multiple Push/Pop Operations");
     
     t_stack s;
-    init_t_stack(&s, 10);
+    init_stack(&s, 10);
     
     int i = 0;
     while (i < 5)
@@ -131,7 +131,7 @@ void test_stack_capacity(void)
     TEST_START("Stack Capacity");
     
     t_stack s;
-    init_t_stack(&s, 100);
+    init_stack(&s, 100);
     
     ASSERT_TRUE(s.capacity == 100, "Capacity set correctly");
     ASSERT_EQ(s.top, -1, "Stack initialized empty");

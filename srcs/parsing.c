@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:21:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/31 10:27:16 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:33:45 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool    parse(t_stack *a, t_stack *b, int argc, char **argv)
         split_str = &argv[1];
         capacity = argc - 1;
     }
-    if (!init_t_stack(a, capacity) || !init_t_stack(b, capacity))
+    if (!init_stack(a, capacity) || !init_stack(b, capacity))
     {
         DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
         return (1);
