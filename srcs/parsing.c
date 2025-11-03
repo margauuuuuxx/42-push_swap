@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:21:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/31 09:28:03 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:27:16 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t   split_len(char **str) {
     return (i);
 }
 
-static bool is_valid(char **str, Stack *s, size_t len) 
+static bool is_valid(char **str, t_stack *s, size_t len) 
 {
     int i;
     int j;
@@ -49,7 +49,7 @@ static bool is_valid(char **str, Stack *s, size_t len)
     return (true);
 }
 
-bool    parse(Stack *a, Stack *b, int argc, char **argv)
+bool    parse(t_stack *a, t_stack *b, int argc, char **argv)
 {
     char    **split_str;
     size_t  capacity;
@@ -62,9 +62,9 @@ bool    parse(Stack *a, Stack *b, int argc, char **argv)
         split_str = &argv[1];
         capacity = argc - 1;
     }
-    if (!init_stack(a, capacity) || !init_stack(b, capacity))
+    if (!init_t_stack(a, capacity) || !init_t_stack(b, capacity))
     {
-        DEBUG_LOG("%sError: %sMalloc failure in init_stacks", RED, RESET);
+        DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
         return (1);
     }
     return (is_valid(split_str, a, capacity));

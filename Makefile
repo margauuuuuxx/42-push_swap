@@ -4,7 +4,7 @@ CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
 INCLUDES	= -I includes -I printf/includes -I printf/libft
 
 SRCS 		=	srcs/main.c \
-				srcs/parsing.c srcs/split.c srcs/stack_operations.c srcs/stack_utils.c srcs/utils.c
+				srcs/parsing.c srcs/split.c srcs/t_stack_operations.c srcs/t_stack_utils.c srcs/utils.c
 
 
 # NAME_BONUS      = checker

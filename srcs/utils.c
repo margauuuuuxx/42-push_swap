@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:15:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/31 09:38:40 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:27:16 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	output_message(char *str) {
 		return;
 }
 
-void	print_stack(Stack *s) {
+void	print_t_stack(t_stack *s) {
 	DEBUG_LOG("Top");
 	while (s->top > -1) {
 		DEBUG_LOG("\t%d ", top(s));

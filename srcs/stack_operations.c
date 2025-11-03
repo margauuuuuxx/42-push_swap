@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_operations.c                                 :+:      :+:    :+:   */
+/*   t_stack_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,21 @@
 
 #include "../includes/push_swap.h"
 
-void    push(Stack *s, int value) {
+void    push(t_stack *s, int value) {
     if (s->top + 1 > (int)s->capacity)
     {
-        DEBUG_LOG("%sError: %sPush: stack is full", RED, RESET);
+        DEBUG_LOG("%sError: %sPush: t_stack is full", RED, RESET);
         return;
     }
     s->values[++s->top] = value;
 }
 
-void    pop(Stack *s) {
+void    pop(t_stack *s) {
     if (s->top > -1)
         s->top--;
 }
 
-int top(Stack *s) {
+int top(t_stack *s) {
     if (s->top > -1)
         return (s->values[s->top]);
     return (-1);
