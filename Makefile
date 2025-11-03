@@ -4,8 +4,14 @@ CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
 INCLUDES	= -I includes -I printf/includes -I printf/libft
 
 SRCS 		=	srcs/main.c \
-				srcs/parsing.c srcs/split.c srcs/t_stack_operations.c srcs/t_stack_utils.c srcs/utils.c
+				srcs/parsing.c srcs/split.c srcs/stack_operations.c srcs/stack_utils.c srcs/utils.c \
+				srcs/coordinate_compression.c
 
+# Test configuration
+TEST_DIR	= tests
+TEST_SRCS	= $(wildcard $(TEST_DIR)/test_*.c)
+TEST_BINS	= $(TEST_SRCS:$(TEST_DIR)/%.c=$(TEST_DIR)/%)
+TEST_OBJS	= $(filter-out $(OBJDIR)/srcs/main.o, $(OBJS))
 
 # NAME_BONUS      = checker
 # SRCS_BONUS      = srcs/checker/main_bonus.c \
@@ -37,9 +43,23 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(TEST_BINS)
 	@echo -e "Full cleaning..."
 	@echo -e "\033[32mDone!\033[0m"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# Test targets
+$(TEST_DIR)/%: $(TEST_DIR)/%.c $(TEST_OBJS)
+	@echo -e "\033[34mCompiling test: $@\033[0m"
+	@$(CC) $(CFLAGS) $(INCLUDES) $< $(TEST_OBJS) -o $@
+
+tests: $(OBJS) $(TEST_BINS)
+	@echo -e "\033[32mAll tests compiled!\033[0m"
+
+test: tests
+	@echo -e "\n\033[33mRunning all tests...\033[0m\n"
+	@chmod +x $(TEST_DIR)/run_all_tests.sh
+	@./$(TEST_DIR)/run_all_tests.sh
+
+.PHONY: all clean fclean re tests test

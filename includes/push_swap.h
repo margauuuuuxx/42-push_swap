@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/31 10:35:29 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:27:25 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_cost {
 typedef struct s_node_pos {
     int                 idx; //normalized idx
     int                 stack_pos; // position in the stack
-    struct s_node_pos   left;
-    struct s_node_pos   right;
+    struct s_node_pos   *left;
+    struct s_node_pos   *right;
 }   t_node_pos;
 
 typedef struct s_chunk {
@@ -82,10 +82,19 @@ typedef struct s_algo {
     int         chunk_count;
 }   t_algo;
 
+typedef struct s_merge {
+    int left;
+    int right;
+    int mid;
+}   t_merge;
+
+// ***** compress *****
+void    compress(t_stack *a);
+
 // ***** t_stack utils *****
 bool    parse(t_stack *a, t_stack *b, int argc, char **argv);
 
-// ***** t_stack utils *****
+// ***** split *****
 char	**ft_split(char const *s, char c);
 
 // ***** t_stack operations *****
@@ -101,4 +110,5 @@ int     ft_atoi(const char *str);
 size_t  ft_strlen(char *str);
 void	output_message(char *str);
 void	print_t_stack(t_stack *s);
+void copy_stack(int *cpy, t_stack *a);
 

@@ -27,8 +27,12 @@ static bool is_valid(char **str, t_stack *s, size_t len)
     int j;
     int count;
     
-    i = len - 1;
-    while (i >= 0) {
+    if (len == 0)
+        return (false);
+    i = 0;
+    while (i < (int)len) {
+        if (!str[i] || str[i][0] == '\0')
+            return (false);
         j = ft_strlen(str[i]) - 1;
         count = 0;
         while (j >= 0) {
@@ -43,6 +47,10 @@ static bool is_valid(char **str, t_stack *s, size_t len)
             }
             j--;
         }
+        i++;
+    }
+    i = (int)len - 1;
+    while (i >= 0) {
         push(s, ft_atoi(str[i]));
         i--;
     }

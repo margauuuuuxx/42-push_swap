@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:21 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/31 10:49:26 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:28:01 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int main(int argc, char **argv)
         output_message("Error: Invalid character in argument ...\n");
         return (1);
     }
-    print_t_stack(&a);
-    a.indices = compress(&a.values, &a.capacity);
+    compress(&a);
     //sort(&a, &b);
     return (0);
 }
