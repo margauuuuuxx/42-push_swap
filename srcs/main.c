@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:21 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/03 12:04:41 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:53:07 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
 
 int main(int argc, char **argv)
 {
-    t_stack   a;
-    t_stack   b;
+    t_stack         a;
+    t_stack         b;
+    t_algo          algo;
 
-    if (argc < 2) {
-        output_message("Error: Please submit at least one argument ...\n");
-        return (1);
-    }
+    if (argc < 2)
+        return (output_message("Error: Please submit at least one argument ...\n"), 1);
     if (!parse(&a, &b, argc, argv))
-    {
-        output_message("Error: Invalid character in argument ...\n");
-        return (1);
-    }
+        return (output_message("Error: Invalid character in argument ...\n"), 1);
     compress(&a);
     calculate_lis(&a);
-    //sort(&a, &b);
+    if (init_algo(&algo, &a, &b))
+        return (output_message("Error: Init algo\n"), 1);
+    sort(&algo);
+    free_chunk_array(algo.chunks);
+    free_stack(&a);
+    free_stack(&b);
     return (0);
 }

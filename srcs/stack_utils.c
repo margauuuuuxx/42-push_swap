@@ -36,5 +36,6 @@ int init_stack(t_stack *s, int capacity) {
     }
     s->top = -1;
     s->capacity = capacity;
+    s->not_in_lis = -1;
     return (1);
 }

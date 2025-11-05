@@ -6,12 +6,13 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/03 12:04:35 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:07:12 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -40,6 +41,7 @@ typedef struct s_t_stack {
     int     *values;
     int     *indices; // normalized indices
     bool    *in_LIS;
+    int     not_in_lis;
     int     top;
     size_t  capacity;
 }   t_stack;
@@ -67,6 +69,13 @@ typedef struct s_chunk {
     int size;
 }   t_chunk;
 
+typedef struct s_chunk_array {
+    t_chunk *chunks;
+    int     count;
+    int     size;
+    int     range;
+}   t_chunk_array;
+
 typedef struct s_lis {
     int *lens; // lens of LIS ending at i
     int *prev; // previous els in LIS
@@ -75,11 +84,10 @@ typedef struct s_lis {
 }   t_lis;
 
 typedef struct s_algo {
-    t_stack     *a;
-    t_stack     *b;
-    t_node_pos  *pos_tree;
-    t_chunk     *chunks;
-    int         chunk_count;
+    t_stack         *a;
+    t_stack         *b;
+    t_node_pos      *pos_tree;
+    t_chunk_array   *chunks;
 }   t_algo;
 
 typedef struct s_merge {
@@ -87,6 +95,12 @@ typedef struct s_merge {
     int right;
     int mid;
 }   t_merge;
+
+// ***** chunk *****
+void    free_chunk_array(t_chunk_array *chunks);
+t_chunk_array   *create_chunk(t_stack *a);
+void    push_chunks_to_b(t_algo *algo);
+bool    is_in_chunk(int idx, t_chunk *chunk);
 
 // ***** compress *****
 void    compress(t_stack *a);
