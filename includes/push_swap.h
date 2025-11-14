@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/05 16:07:12 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:37:01 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <limits.h>
 
 # define RED "\033[31m"
 # define GREEN "\033[32m"
