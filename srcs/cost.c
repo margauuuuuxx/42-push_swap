@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:32:09 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:02:33 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:36:43 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,54 @@ int optimize_combined_cost(t_cost *cost)
     return (cost->cost_a + cost->cost_b + 1);
 }
 
+void    wrap_around(t_stack *a, int *best_pos)
+{
+    int min_val;
+    int i;
+
+    min_val = INT_MAX;
+    i = 0;
+    while (i <= a->top)
+    {
+        if (a->indices[i] < min_val)
+        {
+            min_val = a->indices[i];
+            *best_pos = i;
+        }
+        i++;
+    }
+}
+
+int find_target_pos(int b_idx, t_stack *a)
+{
+    int closest_bigger;
+    int best_pos;
+    int i;
+
+    closest_bigger = INT_MAX;
+    best_pos = 0;
+    i = 0;
+    while (i <= a->top)
+    {
+        if (a->indices[i] > b_idx && a->indices[i] < closest_bigger)
+        {
+            closest_bigger = a->indices[i];
+            best_pos = i;
+        }
+        i++;
+    }
+    if (closest_bigger == INT_MAX)
+        wrap_around(a, &best_pos);
+    return (best_pos);
+}
+
 t_cost  calculate_move_cost(t_algo *algo, int b_idx)
 {
     t_cost              cost;
     int                 target_pos;
 
     cost.b_idx = b_idx;
-    target_pos = find_target_pos(algo->pos_tree, algo->b->indices[b_idx], algo->a); // WHERE IS IT IMPLEMENTED 
+    target_pos = find_target_pos(algo->b->indices[b_idx], algo->a);
     calculate_cost_b(&cost, algo->b, target_pos);
     calculate_cost_a(&cost, algo->a, target_pos);
     cost.total = optimize_combined_cost(&cost);
@@ -97,11 +138,11 @@ t_cost  find_cheapest_move(t_algo *algo)
     return (cheapest);
 }
 
-void    execute_same_dir(int remaining_a, int remaining_b, t_algo *algo, t_cost *cost)
+void    execute_same_dir(int *remaining_a, int *remaining_b, t_algo *algo, t_cost *cost)
 {
     int combined;
 
-    combined = (remaining_a < remaining_b) ? remaining_a : remaining_b;
+    combined = (*remaining_a < *remaining_b) ? *remaining_a : *remaining_b;
     while (combined > 0)
     {
         if (cost->dir_a)
@@ -110,8 +151,8 @@ void    execute_same_dir(int remaining_a, int remaining_b, t_algo *algo, t_cost 
             rrr(algo);
         combined--;
     }
-    remaining_a -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
-    remaining_b -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
+    *remaining_a -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
+    *remaining_b -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
 }
 
 void    execute_move(t_algo *algo, t_cost *cost)
@@ -122,7 +163,7 @@ void    execute_move(t_algo *algo, t_cost *cost)
     remaining_a = cost->cost_a;
     remaining_b = cost->cost_b;
     if (cost->dir_a == cost->dir_b)
-        execute_same_dir(remaining_a, remaining_b, algo, cost);
+        execute_same_dir(&remaining_a, &remaining_b, algo, cost);
     while (remaining_a > 0)
     {
         if (cost->dir_a)
@@ -141,3 +182,4 @@ void    execute_move(t_algo *algo, t_cost *cost)
     }
     pa(algo);
 }
+

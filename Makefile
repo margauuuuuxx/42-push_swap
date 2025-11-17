@@ -8,7 +8,7 @@ SRCS 		=	srcs/main.c \
 				srcs/utils/split.c srcs/utils/stack_utils.c srcs/utils/utils.c \
 				srcs/algo.c srcs/chunk.c srcs/compress.c srcs/cost.c \
 				srcs/final_rotate.c srcs/insertion.c srcs/lis.c \
-				srcs/parsing.c srcs/position_bst.c srcs/small_sort.c \
+				srcs/parsing.c srcs/small_sort.c \
 
 # Test configuration
 TEST_DIR	= tests

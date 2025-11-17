@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:16:04 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 14:44:29 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:21:22 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    final_rotate_to_min(t_algo *algo)
         return;
     min_pos = find_min_pos(algo->a);
     cost_forward = algo->a->top - min_pos;
-    cost_backward = min_pos - 1;
+    cost_backward = min_pos + 1;
     if (cost_forward <= cost_backward)
     {
         while (cost_forward > 0)

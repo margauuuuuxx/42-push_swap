@@ -6,11 +6,12 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:10:44 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:11:07 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:32:26 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once 
+#include <stdbool.h>
 
 typedef struct s_split
 {
@@ -38,14 +39,6 @@ typedef struct s_cost {
     int     b_idx; // which el of b 
 }   t_cost;
 
-// position trackr for BST node
-typedef struct s_node_pos {
-    int                 idx; //normalized idx
-    int                 stack_pos; // position in the stack
-    struct s_node_pos   *left;
-    struct s_node_pos   *right;
-}   t_node_pos;
-
 typedef struct s_chunk {
     int min_idx; // min idx in chunk
     int max_idx; // max idx in chunk
@@ -69,7 +62,6 @@ typedef struct s_lis {
 typedef struct s_algo {
     t_stack         *a;
     t_stack         *b;
-    t_node_pos      *pos_tree;
     t_chunk_array   *chunks;
 }   t_algo;
 

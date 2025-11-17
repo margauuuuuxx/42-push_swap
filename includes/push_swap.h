@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:11:43 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:31:47 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,6 @@ void    reverse_rotate(t_stack *stack);
 bool    parse(t_stack *a, t_stack *b, int argc, char **argv);
 int     init_stack(t_stack *s, int capacity);
 void    free_stack(t_stack *s);
-
-// ***** position_bst *****
-t_node_pos  *create_position_tree(t_stack *a);
-int         find_target_pos(t_node_pos *root, int b_idx, t_stack *a);
-void        free_pos_tree(t_node_pos *root);
 
 // ***** small sort *****
 bool    is_sorted(t_stack *s);
