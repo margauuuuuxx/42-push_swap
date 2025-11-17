@@ -2,56 +2,66 @@
 
 void smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 {
-    int cost_fwd = s->top - pos;
-    int cost_bwd = pos + 1;
+    int cf = s->top - pos;
+    int cb = pos + 1;
     
     if (pos == s->top)
         return;
-    if (cost_fwd <= cost_bwd)
-        while (cost_fwd-- > 0)
+    if (cf <= cb)
+        while (cf-- > 0)
             (c == 'a') ? ra(algo) : rb(algo);
     else
-        while (cost_bwd-- > 0)
+        while (cb-- > 0)
             (c == 'a') ? rra(algo) : rrb(algo);
 }
 
-static int get_chunk_size(int size)
+static int get_chunks(int size)
 {
-    if (size <= 16)
-        return (size);
     if (size <= 100)
-        return (17);
+        return (7);
     if (size <= 500)
-        return (37);
-    return (50);
+        return (15);
+    return (20);
 }
 
 void sort_medium_stack(t_algo *algo)
 {
     int size = algo->a->top + 1;
-    int chunk_sz = get_chunk_size(size);
+    int chunks = get_chunks(size);
+    int chunk_sz = size / chunks;
     int pushed = 0;
-    int chunk_max = chunk_sz;
-    int i;
+    int target = 0;
+    int i, pos, best_cost, cost_top, cost_bot;
     
     while (algo->a->top > 2 && pushed < size - 3)
     {
-        i = algo->a->top;
-        int found = 0;
-        while (i >= 0)
+        best_cost = INT_MAX;
+        pos = -1;
+        i = 0;
+        while (i <= algo->a->top)
         {
-            if (algo->a->indices[i] < chunk_max)
+            if (algo->a->indices[i] >= target && algo->a->indices[i] < target + chunk_sz)
             {
-                smart_rotate_to_top(algo->a, i, algo, 'a');
-                pb(algo);
-                pushed++;
-                found = 1;
-                break;
+                cost_top = algo->a->top - i;
+                cost_bot = i + 1;
+                if (cost_top < best_cost || cost_bot < best_cost)
+                {
+                    best_cost = (cost_top < cost_bot) ? cost_top : cost_bot;
+                    pos = i;
+                }
             }
-            i--;
+            i++;
         }
-        if (!found)
-            chunk_max += chunk_sz;
+        if (pos == -1)
+        {
+            target += chunk_sz;
+            continue;
+        }
+        smart_rotate_to_top(algo->a, pos, algo, 'a');
+        pb(algo);
+        if (algo->b->top > 0 && algo->b->indices[algo->b->top] < target + chunk_sz / 2)
+            rb(algo);
+        pushed++;
     }
     
     if (algo->a->top == 2)
@@ -59,18 +69,18 @@ void sort_medium_stack(t_algo *algo)
     
     while (algo->b->top >= 0)
     {
-        int max_p = 0, max_v = algo->b->indices[0];
+        int mx_p = 0, mx_v = algo->b->indices[0];
         i = 1;
         while (i <= algo->b->top)
         {
-            if (algo->b->indices[i] > max_v)
+            if (algo->b->indices[i] > mx_v)
             {
-                max_v = algo->b->indices[i];
-                max_p = i;
+                mx_v = algo->b->indices[i];
+                mx_p = i;
             }
             i++;
         }
-        smart_rotate_to_top(algo->b, max_p, algo, 'b');
+        smart_rotate_to_top(algo->b, mx_p, algo, 'b');
         pa(algo);
     }
     

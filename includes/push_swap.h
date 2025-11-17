@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 16:27:38 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:53:39 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void    sort_small_stack(t_algo *algo);
 
 // ***** sort medium stack *****
 void    sort_medium_stack(t_algo *algo);
-
 
 // ***** split *****
 char	**ft_split(char const *s, char c);
