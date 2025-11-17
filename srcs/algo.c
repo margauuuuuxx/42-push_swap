@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:40:40 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/05 16:54:13 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:59:25 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void    smart_rotation_push(t_algo *algo, t_chunk *chunk)
     
     while (chunk_has_elements_in_a(algo->a, chunk))
     {
-        el_idx = find_closest_chunk_element(algo->a, chunk);
+        el_idx = find_closest_chunk_elements(algo->a, chunk);
         if (el_idx == -1)
             break;
         rotate_to_top(algo->a, el_idx, algo, 'a');
@@ -131,7 +131,6 @@ void    smart_rotation_push(t_algo *algo, t_chunk *chunk)
 void    push_chunks_to_b(t_algo *algo)
 {
     int i;
-    int j;
 
     if (!algo->chunks)
         return;

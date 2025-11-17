@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:32:09 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/14 12:46:19 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:02:33 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void    calculate_cost_b(t_cost *cost, t_stack *b, int target_pos)
 {
     int cost_forward;
     int cost_backward;
+    (void)target_pos;
     
     cost_forward = b->top - cost->b_idx;
     cost_backward = cost->b_idx + 1;
@@ -56,7 +57,7 @@ int optimize_combined_cost(t_cost *cost)
     int combined;
     int remaining;
 
-    if (cost->dir_a == cost->dir_a) // same direction
+    if (cost->dir_a == cost->dir_b) // same direction
     {
         combined = (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
         remaining = (cost->cost_a > cost->cost_b) ? (cost->cost_a - cost->cost_b) : (cost->cost_b - cost->cost_a);
@@ -113,11 +114,10 @@ void    execute_same_dir(int remaining_a, int remaining_b, t_algo *algo, t_cost 
     remaining_b -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
 }
 
-void    exectue_move(t_algo *algo, t_cost *cost)
+void    execute_move(t_algo *algo, t_cost *cost)
 {
     int remaining_a;
     int remaining_b;
-    int combined;
 
     remaining_a = cost->cost_a;
     remaining_b = cost->cost_b;
@@ -129,7 +129,7 @@ void    exectue_move(t_algo *algo, t_cost *cost)
             ra(algo);
         else 
         rra(algo);
-        remaining_b--;
+        remaining_a--;
     }
     while (remaining_b > 0)
     {

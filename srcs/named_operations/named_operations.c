@@ -6,11 +6,11 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 16:14:59 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/05 16:33:15 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:50:38 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 void    pa(t_algo *algo)
 {

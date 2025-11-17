@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:44:57 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/05 16:44:37 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:04:53 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_chunk_array   *create_chunk(t_stack *a)
     int i;
     t_chunk_array *chunks;
 
-    if (count_non_lis(a) == 0)
+    if (a->not_in_lis == 0)
         return (NULL);
     chunks = malloc(sizeof(t_chunk_array));
     if (!chunks)

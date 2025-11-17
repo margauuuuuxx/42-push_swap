@@ -6,64 +6,88 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 16:18:05 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/05 16:36:37 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:06:59 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 void    push(t_stack *src, t_stack *dst)
 {
     if (src->top < 0)
         return;
     if (dst->top + 1 < dst->capacity)
-        dst->values[dst->top++] = src->values[src->top--];
+    {
+        dst->values[++dst->top] = src->values[src->top];
+        dst->indices[dst->top] = src->indices[src->top];
+        dst->in_LIS[dst->top] = src->in_LIS[src->top--];
+    }
 }
 
 void    swap(t_stack *stack)
 {
-    int temp_val;
-    int temp_rank;
+    int temp_int;
+    int temp_bool;
 
     if (stack->top < 1)
         return;
-    temp_val = stack->values[stack->top];
+    temp_int = stack->values[stack->top];
     stack->values[stack->top] = stack->values[stack->top - 1];
-    stack->values[stack->top - 1] = temp_val;
+    stack->values[stack->top - 1] = temp_int;
+    temp_int = stack->indices[stack->top];
+    stack->indices[stack->top] = stack->indices[stack->top - 1];
+    stack->indices[stack->top - 1] = temp_int;
+    temp_bool = stack->in_LIS[stack->top];
+    stack->in_LIS[stack->top] = stack->in_LIS[stack->top - 1];
+    stack->in_LIS[stack->top - 1] = temp_bool;
 }
 
 void    rotate(t_stack *stack)
 {
-	int	tmp_val;
-	int	tmp_rank;
+	int	    tmp_val;
+	int	    tmp_indices;
+    bool    tmp_LIS;
 	int	i;
 
 	if (stack->top < 1)
 		return ;
 	tmp_val = stack->values[stack->top];
+    tmp_indices = stack->indices[stack->top];
+    tmp_LIS = stack->in_LIS[stack->top];
 	i = stack->top;
 	while (i > 0)
 	{
 		stack->values[i] = stack->values[i - 1];
+        stack->indices[i] = stack->indices[i - 1];
+        stack->in_LIS[i] = stack->in_LIS[i - 1];
 		i--;
 	}
 	stack->values[0] = tmp_val;
+    stack->indices[0] = tmp_indices;
+    stack->in_LIS[0] = tmp_LIS;
 }
 
 void    reverse_rotate(t_stack *stack)
 {
-    int temp_val;
-    int temp_rank;
+    int     temp_val;
+    int     temp_indices;
+    bool    temp_LIS;
     int i;
 
     if (stack->top < 1)
         return;
     temp_val = stack->values[0];
+    temp_indices = stack->indices[0];
+    temp_LIS = stack->in_LIS[0];
     i = 0;
     while (i < stack->top)
     {
         stack->values[i] = stack->values[i + 1];
+        stack->indices[i] = stack->indices[i + 1];
+        stack->in_LIS[i] = stack->in_LIS[i + 1];
         i++;
     }
     stack->values[stack->top] = temp_val;
+    stack->indices[stack->top] = temp_indices;
+    stack->in_LIS[stack->top] = temp_LIS;
 } 

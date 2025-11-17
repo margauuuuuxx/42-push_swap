@@ -6,11 +6,11 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:13:19 by marlonco          #+#    #+#             */
-/*   Updated: 2025/10/28 11:14:09 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:50:46 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../includes/push_swap.h"
 
 static void	ft_free(char **array, int k)
 {
