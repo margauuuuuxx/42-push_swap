@@ -48,44 +48,49 @@ void    push_to_b_optimized(t_algo *algo, int pos)
     pb(algo);
 }
 
+static void simple_sort_remaining(t_algo *algo)
+{
+    int min_pos;
+    int size;
+    int i;
+    
+    size = algo->a->top + 1;
+    i = 0;
+    
+    while (algo->a->top > 2 && i < size)
+    {
+        min_pos = find_min_pos(algo->a);
+        rotate_to_top(algo->a, min_pos, algo, 'a');
+        pb(algo);
+        i++;
+    }
+    
+    if (algo->a->top == 2)
+        sort_three(algo);
+}
+
 void    sort_small_stack(t_algo *algo)
 {
     int size;
-    int push_count;
     int i;
     int pos;
-    int iterations;
-    int max_iter;
     
     size = algo->a->top + 1;
-    push_count = size / 3;
-    if (push_count < 2)
-        push_count = 2;
-    i = 0;
-    while (i < push_count && algo->a->top > 2)
+    
+    if (size > 5)
     {
-        pos = find_index_pos(algo->a, i);
-        if (pos != -1)
-            push_to_b_optimized(algo, pos);
-        i++;
-    }
-    if (algo->a->top == 2)
-    {
-        sort_three(algo);
-    }
-    else if (algo->a->top > 2)
-    {
-        iterations = 0;
-        max_iter = (algo->a->top + 1) * (algo->a->top + 1);
-        while (!is_sorted(algo->a) && iterations < max_iter)
+        i = 0;
+        while (i < 2 && algo->a->top > 3)
         {
-            if (algo->a->indices[algo->a->top] > algo->a->indices[algo->a->top - 1])
-                sa(algo);
-            ra(algo);
-            iterations++;
+            pos = find_index_pos(algo->a, i);
+            if (pos != -1)
+                push_to_b_optimized(algo, pos);
+            i++;
         }
-        final_rotate_to_min(algo);
     }
+    
+    simple_sort_remaining(algo);
+    
     while (algo->b->top >= 0)
         pa(algo);
 }

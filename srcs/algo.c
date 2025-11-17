@@ -141,19 +141,75 @@ void    push_chunks_to_b(t_algo *algo)
     }
 }
 
+static int find_max_idx(t_stack *s)
+{
+    int max_pos;
+    int max_val;
+    int i;
+    
+    max_pos = 0;
+    max_val = s->indices[0];
+    i = 1;
+    while (i <= s->top)
+    {
+        if (s->indices[i] > max_val)
+        {
+            max_val = s->indices[i];
+            max_pos = i;
+        }
+        i++;
+    }
+    return (max_pos);
+}
+
+void sort_large_stack(t_algo *algo)
+{
+    int size;
+    int to_push;
+    int max_pos;
+    
+    size = algo->a->top + 1;
+    
+    // Push all but 3 to B
+    to_push = size - 3;
+    while (to_push > 0 && algo->a->top > 2)
+    {
+        pb(algo);
+        to_push--;
+    }
+    
+    // Sort remaining 3
+    if (algo->a->top == 2)
+        sort_three(algo);
+    
+    // Push back largest first from B
+    while (algo->b->top >= 0)
+    {
+        max_pos = find_max_idx(algo->b);
+        smart_rotate_to_top(algo->b, max_pos, algo, 'b');
+        pa(algo);
+    }
+}
+
 void    sort(t_algo *algo)
 {
     int size;
 
     size = algo->a->top + 1;
     if (size <= 3)
-        return(sort_three(algo));
+    {
+        sort_three(algo);
+        return;
+    }
     if (size <= 5)
-        return(sort_five(algo));
+    {
+        sort_five(algo);
+        return;
+    }
     if (size <= 20)
-        return(sort_small_stack(algo));
-    if (size <= 100)
-        return(sort_medium_stack(algo));
-    push_chunks_to_b(algo);
-    push_back_to_a(algo);
+    {
+        sort_small_stack(algo);
+        return;
+    }
+    sort_medium_stack(algo);
 }

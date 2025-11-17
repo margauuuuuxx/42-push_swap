@@ -35,7 +35,9 @@
 // ***** algo *****
 int     init_algo(t_algo *algo, t_stack *a, t_stack *b);
 void    rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
+void    smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
 void    sort(t_algo *algo);
+void    sort_large_stack(t_algo *algo);
 
 // ***** chunk *****
 void    free_chunk_array(t_chunk_array *chunks);
@@ -120,3 +122,4 @@ void	output_message(char *str);
 void	print_t_stack(t_stack *s);
 void    copy_stack(int *cpy, t_stack *a);
 
+void    turk_sort(t_algo *algo);

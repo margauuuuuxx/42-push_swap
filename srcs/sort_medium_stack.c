@@ -1,51 +1,78 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_medium_stack.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 16:21:49 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 16:26:39 by marlonco         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/push_swap.h"
 
-void    sort_medium_stack(t_algo *algo)
+void smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 {
-    int size;
-    int mid;
-    int i;
-    int pos;
-    int min_pos;
-    int iterations;
+    int cost_fwd = s->top - pos;
+    int cost_bwd = pos + 1;
+    
+    if (pos == s->top)
+        return;
+    if (cost_fwd <= cost_bwd)
+        while (cost_fwd-- > 0)
+            (c == 'a') ? ra(algo) : rb(algo);
+    else
+        while (cost_bwd-- > 0)
+            (c == 'a') ? rra(algo) : rrb(algo);
+}
 
-    size = algo->a->top + 1;
-    mid = size / 2;
-    i = 0;
-    while (i < mid)
+static int get_chunk_size(int size)
+{
+    if (size <= 16)
+        return (size);
+    if (size <= 100)
+        return (17);
+    if (size <= 500)
+        return (37);
+    return (50);
+}
+
+void sort_medium_stack(t_algo *algo)
+{
+    int size = algo->a->top + 1;
+    int chunk_sz = get_chunk_size(size);
+    int pushed = 0;
+    int chunk_max = chunk_sz;
+    int i;
+    
+    while (algo->a->top > 2 && pushed < size - 3)
     {
-        pos = find_index_pos(algo->a, i);
-        if (pos != -1)
-            push_to_b_optimized(algo, pos);
-        i++;
+        i = algo->a->top;
+        int found = 0;
+        while (i >= 0)
+        {
+            if (algo->a->indices[i] < chunk_max)
+            {
+                smart_rotate_to_top(algo->a, i, algo, 'a');
+                pb(algo);
+                pushed++;
+                found = 1;
+                break;
+            }
+            i--;
+        }
+        if (!found)
+            chunk_max += chunk_sz;
     }
-    iterations = 0;
-    while (!is_sorted(algo->a) && algo->a->top > 0 && iterations < size * size)
+    
+    if (algo->a->top == 2)
+        sort_three(algo);
+    
+    while (algo->b->top >= 0)
     {
-        min_pos = find_min_pos(algo->a);
-        
-        if (min_pos == algo->a->top)
+        int max_p = 0, max_v = algo->b->indices[0];
+        i = 1;
+        while (i <= algo->b->top)
         {
-            pb(algo);
-            iterations = 0;
+            if (algo->b->indices[i] > max_v)
+            {
+                max_v = algo->b->indices[i];
+                max_p = i;
+            }
+            i++;
         }
-        else
-        {
-            rotate_to_top(algo->a, min_pos, algo, 'a');
-            iterations++;
-        }
+        smart_rotate_to_top(algo->b, max_p, algo, 'b');
+        pa(algo);
     }
-    push_back_to_a(algo);
+    
+    final_rotate_to_min(algo);
 }
