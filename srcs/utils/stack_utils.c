@@ -14,10 +14,12 @@
 
 void    free_stack(t_stack *s)
 {
-    free(s->values);
-    free(s->indices);
-    free(s->in_LIS);
-    free(s);
+    if (s->values)
+        free(s->values);
+    if (s->indices)
+        free(s->indices);
+    if (s->in_LIS)
+        free(s->in_LIS);
 }
 
 int init_stack(t_stack *s, int capacity) {
@@ -26,7 +28,7 @@ int init_stack(t_stack *s, int capacity) {
     i = 0;
     s->values = malloc(sizeof(int) * capacity);
     s->indices = malloc(sizeof(int) * capacity);
-    s->in_LIS = malloc(sizeof(int) * capacity);
+    s->in_LIS = malloc(sizeof(bool) * capacity);
     if (!s->values || !s->indices || !s->in_LIS)
         return (0);
     while (i < capacity)

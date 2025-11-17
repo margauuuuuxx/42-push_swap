@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:21:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:08:46 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:47:40 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ static size_t   split_len(char **str) {
 void    push_element(t_stack *s, int nbr)
 {
     if (s->top + 1 < s->capacity)
+    {
         s->values[++s->top] = nbr;
+        s->indices[s->top] = -1;
+        s->in_LIS[s->top] = false;
+    }
 }
 
 static bool is_valid(char **str, t_stack *s, size_t len) 

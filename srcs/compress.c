@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:39:23 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/03 11:58:05 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:46:54 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,29 @@ int binary_search(int *sorted, int size, int target)
     return (-1);
 }
 
-static void map(int *cpy, int *temp, t_stack *a) {
+static void map(int *sorted_cpy, t_stack *a) {
     int i;
 
     i = 0;
     while (i <= a->top)
     {
-        a->indices[i] = binary_search(cpy, a->top + 1, a->values[i]);
+        a->indices[i] = binary_search(sorted_cpy, a->top + 1, a->values[i]);
         i++;
     }
-    free(cpy);
-    free(temp);
 }
 
 void    compress(t_stack *a)
 {
     int *cpy;
-    int *sorted;
+    int *temp;
 
     cpy = malloc(a->capacity * sizeof(int));
-    sorted = malloc(a->capacity * sizeof(int));
-    if (!cpy || !sorted)
+    temp = malloc(a->capacity * sizeof(int));
+    if (!cpy || !temp)
         return;
     copy_stack(cpy, a);
-    merge_sort(cpy, sorted, 0, a->top);
-    map(cpy, sorted, a);
+    merge_sort(cpy, temp, 0, a->top);
+    map(cpy, a);
+    free(cpy);
+    free(temp);
 }
