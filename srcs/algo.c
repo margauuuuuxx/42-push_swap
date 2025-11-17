@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:40:40 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:38:11 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:27:52 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,17 @@ void    push_chunks_to_b(t_algo *algo)
 
 void    sort(t_algo *algo)
 {
-    if (algo->a->top + 1 <= 3)
+    int size;
+
+    size = algo->a->top + 1;
+    if (size <= 3)
         return(sort_three(algo));
-    if (algo->a->top + 1 <= 5)
+    if (size <= 5)
         return(sort_five(algo));
+    if (size <= 20)
+        return(sort_small_stack(algo));
+    if (size <= 100)
+        return(sort_medium_stack(algo));
     push_chunks_to_b(algo);
     push_back_to_a(algo);
 }

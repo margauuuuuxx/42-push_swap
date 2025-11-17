@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:28 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:31:47 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:27:38 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,15 @@ void    free_stack(t_stack *s);
 bool    is_sorted(t_stack *s);
 void    sort_three(t_algo *algo);
 void    sort_five(t_algo *algo);
+
+// ***** sort small stack *****
+int     find_index_pos(t_stack *s, int target_idx);
+void    push_to_b_optimized(t_algo *algo, int pos);
+void    sort_small_stack(t_algo *algo);
+
+// ***** sort medium stack *****
+void    sort_medium_stack(t_algo *algo);
+
 
 // ***** split *****
 char	**ft_split(char const *s, char c);

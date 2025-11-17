@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 14:21:52 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:47:40 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:36:36 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ void    push_element(t_stack *s, int nbr)
         s->indices[s->top] = -1;
         s->in_LIS[s->top] = false;
     }
+}
+
+static bool no_duplicates(t_stack *s)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < s->top)
+    {
+        j = i + 1;
+        while (j <= s->top)
+        {
+            if (s->values[i] == s->values[j])
+                return (false);
+            j++;
+        }
+        i++;
+    }
+    return (true);
 }
 
 static bool is_valid(char **str, t_stack *s, size_t len) 
@@ -64,7 +84,7 @@ static bool is_valid(char **str, t_stack *s, size_t len)
         push_element(s, ft_atoi(str[i]));
         i--;
     }
-    return (true);
+    return (no_duplicates(s));
 }
 
 bool    parse(t_stack *a, t_stack *b, int argc, char **argv)
@@ -83,7 +103,7 @@ bool    parse(t_stack *a, t_stack *b, int argc, char **argv)
     if (!init_stack(a, capacity) || !init_stack(b, capacity))
     {
         DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
-        return (1);
+        return (false);
     }
     return (is_valid(split_str, a, capacity));
 }
