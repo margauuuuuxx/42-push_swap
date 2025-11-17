@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:03:56 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 14:15:53 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:03:06 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool    is_sorted(t_stack *s)
     i = 0;
     while (i < s->top)
     {
-        if (s->values[i] > s->values[i + 1])
+        if (s->values[i] < s->values[i + 1])
             return (false);
         i++;
     }
