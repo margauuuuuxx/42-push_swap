@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:44:57 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:04:53 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:54:32 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,26 @@ void    get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
     }
 }
 
-bool    is_in_chunk(int idx, t_chunk *chunk)
-{
-    if (idx >= chunk->min_idx && idx <= chunk->max_idx)
-        return (true);
-    return (false);
-}
+// bool    is_in_chunk(int idx, t_chunk *chunk)
+// {
+//     if (idx >= chunk->min_idx && idx <= chunk->max_idx)
+//         return (true);
+//     return (false);
+// }
 
-int find_corresponding_chunk(int idx, t_chunk *chunks, int chunk_count)
-{
-    int i;
+// int find_corresponding_chunk(int idx, t_chunk *chunks, int chunk_count)
+// {
+//     int i;
 
-    i =0;
-    while (i < chunk_count)
-    {
-        if (is_in_chunk(idx, &chunks[i]))
-            return (i);
-        i++;
-    }
-    return (-1);
-}
+//     i =0;
+//     while (i < chunk_count)
+//     {
+//         if (is_in_chunk(idx, &chunks[i]))
+//             return (i);
+//         i++;
+//     }
+//     return (-1);
+// }
 
 t_chunk_array   *create_chunk(t_stack *a)
 {
