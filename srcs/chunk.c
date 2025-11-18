@@ -12,8 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-// Push to b by chunks 
-
 void    free_chunk_array(t_chunk_array *chunks)
 {
     if (!chunks)
