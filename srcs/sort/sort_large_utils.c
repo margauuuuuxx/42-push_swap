@@ -1,4 +1,3 @@
-
 #include "../../includes/push_swap.h"
 
 int	get_chunks(int size)

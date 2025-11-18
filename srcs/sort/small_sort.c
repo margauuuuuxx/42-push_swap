@@ -28,9 +28,9 @@ bool	is_sorted(t_stack *s)
 
 void	sort_three(t_algo *algo)
 {
-	int		top;
-	int		mid;
-	int		bottom;
+	int	top;
+	int	mid;
+	int	bottom;
 
 	if (is_sorted(algo->a))
 		return ;

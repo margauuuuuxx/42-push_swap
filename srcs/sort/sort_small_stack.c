@@ -69,12 +69,11 @@ static void	simple_sort_remaining(t_algo *algo)
 
 void	sort_small_stack(t_algo *algo)
 {
-	int size;
-	int i;
-	int pos;
+	int	size;
+	int	i;
+	int	pos;
 
 	size = algo->a->top + 1;
-
 	if (size > 5)
 	{
 		i = 0;
@@ -86,9 +85,7 @@ void	sort_small_stack(t_algo *algo)
 			i++;
 		}
 	}
-
 	simple_sort_remaining(algo);
-
 	while (algo->b->top >= 0)
 		pa(algo);
 }
