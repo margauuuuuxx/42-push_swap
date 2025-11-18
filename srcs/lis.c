@@ -6,7 +6,7 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:31:35 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/18 13:54:54 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:08:02 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,6 @@ void count_non_lis(t_stack *a)
     }
     a->not_in_lis = count;
 }
-
-// bool    is_in_lis(t_stack *a, int pos)
-// {
-//     if (a->in_LIS[pos])
-//         return (true);
-//     return (false);
-// }
 
 void    calculate_lis(t_stack *a)
 {

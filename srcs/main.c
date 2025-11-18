@@ -6,14 +6,11 @@
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 13:42:21 by marlonco          #+#    #+#             */
-/*   Updated: 2025/11/17 15:38:22 by marlonco         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:09:27 by marlonco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-// fist el of the string --> top of the t_stack so add from the end 
-// GOAL: smallest nbr at the topok
 
 int main(int argc, char **argv)
 {
