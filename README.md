@@ -82,13 +82,6 @@ For large stacks (>100 elements):
 - Calculates optimal rotation costs for both stacks
 - Optimizes combined rotations using rr/rrr operations
 - Finds best target position for each element
-- This alone saved ~700 operations for 500 numbers!
-
-
-**Optimizations:**
-- Same-direction rotations can be combined (rr/rrr)
-- Algorithm always chooses the cheapest move
-- Considers both forward and reverse rotation costs
 
 **Implementation:** `cost.c`
 

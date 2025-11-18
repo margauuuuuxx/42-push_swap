@@ -24,23 +24,23 @@ static int get_chunks(int size)
     return (20);
 }
 
-void sort_medium_stack(t_algo *algo)
+static void push_non_lis_to_b(t_algo *algo, int size)
 {
-    int size = algo->a->top + 1;
     int chunks = get_chunks(size);
     int chunk_sz = size / chunks;
     int target = 0;
     int i, pos, best_cost, cost_top, cost_bot;
-    int max_to_keep = size - 3;
+    int pushed_count = 0;
+    int target_push_count = size - 3;
     
-    while (algo->b->top < size - 4)
+    while (pushed_count < target_push_count && algo->a->top > 2)
     {
         best_cost = INT_MAX;
         pos = -1;
         i = 0;
         while (i <= algo->a->top)
         {
-            if (algo->a->indices[i] < max_to_keep && 
+            if (!algo->a->in_LIS[i] && 
                 algo->a->indices[i] >= target && 
                 algo->a->indices[i] < target + chunk_sz)
             {
@@ -57,18 +57,77 @@ void sort_medium_stack(t_algo *algo)
         if (pos == -1)
         {
             target += chunk_sz;
-            if (target >= max_to_keep)
+            if (target >= size)
                 break;
             continue;
         }
         smart_rotate_to_top(algo->a, pos, algo, 'a');
         pb(algo);
+        pushed_count++;
         if (algo->b->top > 2)
         {
             int pushed_idx = algo->b->indices[algo->b->top];
             int threshold = target + (int)(chunk_sz * 0.50);
             if (pushed_idx < threshold)
                 rb(algo);
+        }
+    }
+}
+
+void sort_medium_stack(t_algo *algo)
+{
+    int size = algo->a->top + 1;
+    int chunks, chunk_sz, target;
+    int i, pos, best_cost, cost_top, cost_bot;
+    int max_to_keep = size - 3;
+    
+    if (size > 100)
+    {
+        push_non_lis_to_b(algo, size);
+    }
+    else
+    {
+        chunks = get_chunks(size);
+        chunk_sz = size / chunks;
+        target = 0;
+        
+        while (algo->b->top < size - 4)
+        {
+            best_cost = INT_MAX;
+            pos = -1;
+            i = 0;
+            while (i <= algo->a->top)
+            {
+                if (algo->a->indices[i] < max_to_keep && 
+                    algo->a->indices[i] >= target && 
+                    algo->a->indices[i] < target + chunk_sz)
+                {
+                    cost_top = algo->a->top - i;
+                    cost_bot = i + 1;
+                    if (cost_top < best_cost || cost_bot < best_cost)
+                    {
+                        best_cost = (cost_top < cost_bot) ? cost_top : cost_bot;
+                        pos = i;
+                    }
+                }
+                i++;
+            }
+            if (pos == -1)
+            {
+                target += chunk_sz;
+                if (target >= max_to_keep)
+                    break;
+                continue;
+            }
+            smart_rotate_to_top(algo->a, pos, algo, 'a');
+            pb(algo);
+            if (algo->b->top > 2)
+            {
+                int pushed_idx = algo->b->indices[algo->b->top];
+                int threshold = target + (int)(chunk_sz * 0.50);
+                if (pushed_idx < threshold)
+                    rb(algo);
+            }
         }
     }
     
