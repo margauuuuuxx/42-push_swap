@@ -1,5 +1,7 @@
 # Project TODO
 
+- maths fcts
+
 This file lists functions and files that might be candidates for refactoring based on their size or complexity.
 
 ## Functions with more than 25 lines:

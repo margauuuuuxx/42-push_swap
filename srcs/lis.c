@@ -94,12 +94,10 @@ void    compute_lis(t_lis *lis, int *indices, int size)
     lis->max_len = len;
 }
 
-// set a->in_LIS[i]
-void    mark_lis_els(t_stack *a, t_lis *lis)
+static int find_lis_end(t_stack *a, t_lis *lis)
 {
-    int max_idx; // ending position of LIS
+    int max_idx;
     int i;
-    int current_val;
 
     max_idx = -1;
     i = 0;
@@ -112,9 +110,14 @@ void    mark_lis_els(t_stack *a, t_lis *lis)
         }
         i++;
     }
-    if (max_idx == -1)
-        return;
-    a->in_LIS[max_idx] = true;
+    return (max_idx);
+}
+
+static void backtrack_lis(t_stack *a, t_lis *lis, int max_idx)
+{
+    int current_val;
+    int i;
+
     current_val = lis->prev[max_idx];
     if (current_val == -1)
         return;
@@ -126,11 +129,22 @@ void    mark_lis_els(t_stack *a, t_lis *lis)
             a->in_LIS[i] = true;
             if (lis->prev[i] != -1)
                 current_val = lis->prev[i];
-            else 
+            else
                 break;
         }
         i--;
     }
+}
+
+void    mark_lis_els(t_stack *a, t_lis *lis)
+{
+    int max_idx;
+
+    max_idx = find_lis_end(a, lis);
+    if (max_idx == -1)
+        return;
+    a->in_LIS[max_idx] = true;
+    backtrack_lis(a, lis, max_idx);
 }
 
 void count_non_lis(t_stack *a)

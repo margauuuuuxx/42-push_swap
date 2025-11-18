@@ -82,13 +82,40 @@ void    get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
 //     return (-1);
 // }
 
-t_chunk_array   *create_chunk(t_stack *a)
+static void init_chunk_array(t_chunk_array *chunks, int min_idx, int max_idx)
 {
-    int min_idx;
-    int max_idx;
+    chunks->range = max_idx - min_idx + 1;
+    chunks->size = chunks->range / chunks->count;
+    if (chunks->size < 1)
+        chunks->size = 1;
+}
+
+static void fill_chunks(t_chunk_array *chunks, int min_idx, int max_idx)
+{
     int current_min;
     int i;
-    t_chunk_array *chunks;
+
+    current_min = min_idx;
+    i = 0;
+    while (i < chunks->count)
+    {
+        chunks->chunks[i].min_idx = current_min;
+        if (i == chunks->count - 1)
+            chunks->chunks[i].max_idx = max_idx;
+        else
+            chunks->chunks[i].max_idx = current_min + chunks->size - 1;
+        chunks->chunks[i].size = chunks->chunks[i].max_idx
+            - chunks->chunks[i].min_idx + 1;
+        current_min = chunks->chunks[i].max_idx + 1;
+        i++;
+    }
+}
+
+t_chunk_array *create_chunk(t_stack *a)
+{
+    int             min_idx;
+    int             max_idx;
+    t_chunk_array   *chunks;
 
     if (a->not_in_lis == 0)
         return (NULL);
@@ -97,28 +124,13 @@ t_chunk_array   *create_chunk(t_stack *a)
         return (NULL);
     chunks->count = calculate_chunk_count(a->not_in_lis);
     get_non_lis_range(a, &min_idx, &max_idx);
-    chunks->range = max_idx - min_idx + 1;
-    chunks->size = chunks->range / chunks->count;
-    if (chunks->size < 1)
-        chunks->size = 1;
+    init_chunk_array(chunks, min_idx, max_idx);
     chunks->chunks = malloc((chunks->count) * sizeof(t_chunk));
     if (!chunks->chunks)
     {
-        free(chunks);   
+        free(chunks);
         return (NULL);
     }
-    current_min = min_idx;
-    i = 0;
-    while (i < chunks->count)
-    {
-        chunks->chunks[i].min_idx = current_min;
-        if (i == chunks->count - 1)
-            chunks->chunks[i].max_idx = max_idx;
-        else 
-            chunks->chunks[i].max_idx = current_min + chunks->size - 1;
-        chunks->chunks[i].size = chunks->chunks[i].max_idx - chunks->chunks[i].min_idx + 1;
-        current_min = chunks->chunks[i].max_idx + 1;
-        i++;
-    }
+    fill_chunks(chunks, min_idx, max_idx);
     return (chunks);
 }

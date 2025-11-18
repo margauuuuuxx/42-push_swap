@@ -51,39 +51,72 @@ static bool no_duplicates(t_stack *s)
     return (true);
 }
 
-static bool is_valid(char **str, t_stack *s, size_t len) 
+static bool validate_char(char c, int pos, int *count)
 {
-    int i;
+    if ((c < '0' || c > '9') && (c != '+' && c != '-'))
+        return (false);
+    if (*count > 1)
+        return (false);
+    if (c == '+' || c == '-')
+    {
+        if (pos != 0)
+            return (false);
+        (*count)++;
+    }
+    return (true);
+}
+
+static bool validate_string(char *str)
+{
     int j;
     int count;
-    
+
+    if (!str || str[0] == '\0')
+        return (false);
+    j = ft_strlen(str) - 1;
+    count = 0;
+    while (j >= 0)
+    {
+        if (!validate_char(str[j], j, &count))
+            return (false);
+        j--;
+    }
+    return (true);
+}
+
+static bool validate_all_strings(char **str, size_t len)
+{
+    int i;
+
     if (len == 0)
         return (false);
     i = 0;
-    while (i < (int)len) {
-        if (!str[i] || str[i][0] == '\0')
+    while (i < (int)len)
+    {
+        if (!validate_string(str[i]))
             return (false);
-        j = ft_strlen(str[i]) - 1;
-        count = 0;
-        while (j >= 0) {
-            if (((str[i][j] < '0' || str[i][j] > '9') 
-                && (str[i][j] != '+' && str[i][j] != '-'))
-                || count > 1)
-                return (false);
-            if (str[i][j] == '+' || str[i][j] == '-') {
-                if (j != 0)
-                    return (false);
-                count++;
-            }
-            j--;
-        }
         i++;
     }
+    return (true);
+}
+
+static void fill_stack(char **str, t_stack *s, size_t len)
+{
+    int i;
+
     i = (int)len - 1;
-    while (i >= 0) {
+    while (i >= 0)
+    {
         push_element(s, ft_atoi(str[i]));
         i--;
     }
+}
+
+static bool is_valid(char **str, t_stack *s, size_t len)
+{
+    if (!validate_all_strings(str, len))
+        return (false);
+    fill_stack(str, s, len);
     return (no_duplicates(s));
 }
 
