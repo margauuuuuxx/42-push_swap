@@ -4,16 +4,6 @@
 
 This file lists functions and files that might be candidates for refactoring based on their size or complexity.
 
-## Functions with more than 25 lines:
-
-- `create_chunk` (in `srcs/chunk.c`)
-- `execute_move` (in `srcs/cost.c`)
-- `mark_lis_els` (in `srcs/lis.c`)
-- `is_valid` (in `srcs/parsing.c`)
-- `push_non_lis_to_b` (in `srcs/sort_medium_stack.c`)
-- `sort_medium_stack` (in `srcs/sort_medium_stack.c`)
-- `test_lis_long_sequence` (in `tests/test_lis.c`)
-
 ## Files with more than 5 functions:
 
 - `srcs/cost.c` (9 functions)
