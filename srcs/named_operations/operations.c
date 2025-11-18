@@ -90,4 +90,12 @@ void    reverse_rotate(t_stack *stack)
     stack->values[stack->top] = temp_val;
     stack->indices[stack->top] = temp_indices;
     stack->in_LIS[stack->top] = temp_LIS;
+}
+
+void    rrr(t_algo *algo)
+{
+    reverse_rotate(algo->a);
+    reverse_rotate(algo->b);
+    if (write(1, "rrr\n", 4) < 0)
+        return;
 } 

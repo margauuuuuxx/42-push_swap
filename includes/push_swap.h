@@ -77,18 +77,20 @@ void    pb(t_algo *algo);
 void    sa(t_algo *algo);
 void    sb(t_algo *algo);
 void    ss(t_algo *algo);
+
+// ***** named operations 2 *****
 void    ra(t_algo *algo);
 void    rb(t_algo *algo);
 void    rr(t_algo *algo);
 void    rra(t_algo *algo);
 void    rrb(t_algo *algo);
-void    rrr(t_algo *algo);
 
 // ***** operations *****
 void    push(t_stack *src, t_stack *dst);
 void    swap(t_stack *stack);
 void    rotate(t_stack *stack);
 void    reverse_rotate(t_stack *stack);
+void    rrr(t_algo *algo);
 
 // ***** t_stack utils *****
 bool    parse(t_stack *a, t_stack *b, int argc, char **argv);

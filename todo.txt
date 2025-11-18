@@ -1,2 +1,1 @@
-- separate named_operations.c 
 - sep algo.c 
