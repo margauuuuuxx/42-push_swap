@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     t_algo          algo;
 
     if (argc < 2)
-        return (output_message("Error: Please submit at least one argument ...\n"), 1);
+        return (0);
     if (!parse(&a, &b, argc, argv))
         return (output_message("Error: Invalid character in argument ...\n"), 1);
     compress(&a);

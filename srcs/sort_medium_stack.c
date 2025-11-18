@@ -29,18 +29,20 @@ void sort_medium_stack(t_algo *algo)
     int size = algo->a->top + 1;
     int chunks = get_chunks(size);
     int chunk_sz = size / chunks;
-    int pushed = 0;
     int target = 0;
     int i, pos, best_cost, cost_top, cost_bot;
+    int max_to_keep = size - 3;
     
-    while (algo->a->top > 2 && pushed < size - 3)
+    while (algo->b->top < size - 4)
     {
         best_cost = INT_MAX;
         pos = -1;
         i = 0;
         while (i <= algo->a->top)
         {
-            if (algo->a->indices[i] >= target && algo->a->indices[i] < target + chunk_sz)
+            if (algo->a->indices[i] < max_to_keep && 
+                algo->a->indices[i] >= target && 
+                algo->a->indices[i] < target + chunk_sz)
             {
                 cost_top = algo->a->top - i;
                 cost_bot = i + 1;
@@ -55,17 +57,25 @@ void sort_medium_stack(t_algo *algo)
         if (pos == -1)
         {
             target += chunk_sz;
+            if (target >= max_to_keep)
+                break;
             continue;
         }
         smart_rotate_to_top(algo->a, pos, algo, 'a');
         pb(algo);
         if (algo->b->top > 0 && algo->b->indices[algo->b->top] < target + chunk_sz / 2)
             rb(algo);
-        pushed++;
     }
     
     if (algo->a->top == 2)
         sort_three(algo);
+    else if (algo->a->top > 2)
+    {
+        while (algo->a->top > 2)
+            pb(algo);
+        if (algo->a->top == 2)
+            sort_three(algo);
+    }
     
     while (algo->b->top >= 0)
     {

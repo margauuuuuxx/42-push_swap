@@ -196,7 +196,13 @@ void    sort(t_algo *algo)
     int size;
 
     size = algo->a->top + 1;
-    if (size <= 3)
+    if (size == 2)
+    {
+        if (!is_sorted(algo->a))
+            sa(algo);
+        return;
+    }
+    if (size == 3)
     {
         sort_three(algo);
         return;

@@ -73,18 +73,20 @@ void    compute_lis(t_lis *lis, int *indices, int size)
     int len;
     int pos;
     int i;
+    int stack_pos;
 
     len = 0;
     i = 0;
     while (i < size)
     {   
-        pos = lis_binary_search(lis->tail, len, indices[i]);
-        lis->tail[pos] = indices[i];
-        lis->lens[i] = pos + 1;
+        stack_pos = size - 1 - i;
+        pos = lis_binary_search(lis->tail, len, indices[stack_pos]);
+        lis->tail[pos] = indices[stack_pos];
+        lis->lens[stack_pos] = pos + 1;
         if (pos > 0)
-            lis->prev[i] = lis->tail[pos - 1];
+            lis->prev[stack_pos] = lis->tail[pos - 1];
         else
-            lis->prev[i] = -1;
+            lis->prev[stack_pos] = -1;
         if (pos == len)
             len++;
         i++;
