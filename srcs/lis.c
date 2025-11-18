@@ -55,10 +55,7 @@ t_lis	*init_lis(int size)
 	lis->prev = malloc(size * sizeof(int));
 	lis->tail = malloc(size * sizeof(int));
 	if (!lis || !lis->lens || !lis->prev || !lis->tail)
-	{
-		DEBUG_LOG("%sError: %sMalloc failure in init_lis", RED, RESET);
 		return (NULL);
-	}
 	while (i < size)
 	{
 		lis->lens[i] = 0;
@@ -126,7 +123,7 @@ static void	backtrack_lis(t_stack *a, t_lis *lis, int max_idx)
 	{
 		if (a->indices[i] == current_val)
 		{
-			a->in_LIS[i] = true;
+			a->in_lis[i] = true;
 			if (lis->prev[i] != -1)
 				current_val = lis->prev[i];
 			else
@@ -143,7 +140,7 @@ void	mark_lis_els(t_stack *a, t_lis *lis)
 	max_idx = find_lis_end(a, lis);
 	if (max_idx == -1)
 		return ;
-	a->in_LIS[max_idx] = true;
+	a->in_lis[max_idx] = true;
 	backtrack_lis(a, lis, max_idx);
 }
 
@@ -156,7 +153,7 @@ void	count_non_lis(t_stack *a)
 	count = 0;
 	while (i <= a->top)
 	{
-		if (!a->in_LIS[i])
+		if (!a->in_lis[i])
 			count++;
 		i++;
 	}

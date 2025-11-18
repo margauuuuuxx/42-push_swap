@@ -28,7 +28,7 @@ void	push_element(t_stack *s, int nbr)
 	{
 		s->values[++s->top] = nbr;
 		s->indices[s->top] = -1;
-		s->in_LIS[s->top] = false;
+		s->in_lis[s->top] = false;
 	}
 }
 
@@ -137,9 +137,6 @@ bool	parse(t_stack *a, t_stack *b, int argc, char **argv)
 		capacity = argc - 1;
 	}
 	if (!init_stack(a, capacity) || !init_stack(b, capacity))
-	{
-		DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
 		return (false);
-	}
 	return (is_valid(split_str, a, capacity));
 }

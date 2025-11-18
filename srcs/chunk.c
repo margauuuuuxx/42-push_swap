@@ -44,7 +44,7 @@ void	get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
 	i = 0;
 	while (i <= a->top)
 	{
-		if (!a->in_LIS[i])
+		if (!a->in_lis[i])
 		{
 			if (a->indices[i] < *min_idx)
 				*min_idx = a->indices[i];

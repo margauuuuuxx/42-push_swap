@@ -56,7 +56,7 @@ static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
 	i = 0;
 	while (i <= algo->a->top)
 	{
-		if (!algo->a->in_LIS[i] && algo->a->indices[i] >= ctx->target
+		if (!algo->a->in_lis[i] && algo->a->indices[i] >= ctx->target
 			&& algo->a->indices[i] < ctx->target + ctx->chunk_sz)
 		{
 			cost = (algo->a->top - i < i + 1) ? algo->a->top - i : i + 1;

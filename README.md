@@ -136,7 +136,7 @@ For large stacks (>100 elements):
                                  ┌─────────────────────────────┐
                                  │  STEP 4: Push to B          │
                                  │  ★ For size > 100:          │
-                                 │    Filter by !in_LIS[i]     │
+                                 │    Filter by !in_lis[i]     │
                                  │    (skip LIS elements!)     │
                                  │  Process chunks in order:   │
                                  │  - Find closest non-LIS el  │
@@ -252,7 +252,7 @@ ARG="4 67 3 87 23"
 ### Comprehensive Testing
 
 **Test 100 random numbers (50 iterations):**
-```bash
+```bash 
 for i in {1..50}; do
     ARG=$(shuf -i 1-1000 -n 100 | tr '\n' ' ')
     OPS=$(./push_swap $ARG | wc -l)
@@ -390,7 +390,7 @@ For large stacks (>100 elements), the algorithm uses `push_non_lis_to_b()` funct
 
 ```c
 // Key filtering logic:
-if (!algo->a->in_LIS[i] && 
+if (!algo->a->in_lis[i] && 
     algo->a->indices[i] >= target && 
     algo->a->indices[i] < target + chunk_sz)
 {

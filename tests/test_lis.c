@@ -35,7 +35,7 @@ void test_lis_basic(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -45,7 +45,7 @@ void test_lis_basic(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_already_sorted(void)
@@ -67,7 +67,7 @@ void test_lis_already_sorted(void)
     int i = 0;
     while (i <= a.top)
     {
-        ASSERT_TRUE(a.in_LIS[i], "All elements should be in LIS");
+        ASSERT_TRUE(a.in_lis[i], "All elements should be in LIS");
         i++;
     }
     
@@ -75,7 +75,7 @@ void test_lis_already_sorted(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_reverse_sorted(void)
@@ -98,7 +98,7 @@ void test_lis_reverse_sorted(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -108,7 +108,7 @@ void test_lis_reverse_sorted(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_single_element(void)
@@ -123,12 +123,12 @@ void test_lis_single_element(void)
     compress(&a);
     calculate_lis(&a);
     
-    ASSERT_TRUE(a.in_LIS[0], "Single element is in LIS");
+    ASSERT_TRUE(a.in_lis[0], "Single element is in LIS");
     ASSERT_EQ(count_non_lis(&a), 0, "No elements outside LIS");
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_two_elements_sorted(void)
@@ -144,13 +144,13 @@ void test_lis_two_elements_sorted(void)
     compress(&a);
     calculate_lis(&a);
     
-    ASSERT_TRUE(a.in_LIS[0], "First element in LIS");
-    ASSERT_TRUE(a.in_LIS[1], "Second element in LIS");
+    ASSERT_TRUE(a.in_lis[0], "First element in LIS");
+    ASSERT_TRUE(a.in_lis[1], "Second element in LIS");
     ASSERT_EQ(count_non_lis(&a), 0, "All elements in LIS");
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_two_elements_reverse(void)
@@ -170,7 +170,7 @@ void test_lis_two_elements_reverse(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -180,7 +180,7 @@ void test_lis_two_elements_reverse(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_long_sequence(void)
@@ -210,7 +210,7 @@ void test_lis_long_sequence(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -220,7 +220,7 @@ void test_lis_long_sequence(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_alternating(void)
@@ -247,7 +247,7 @@ void test_lis_alternating(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -257,7 +257,7 @@ void test_lis_alternating(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_with_duplicates_removed(void)
@@ -281,7 +281,7 @@ void test_lis_with_duplicates_removed(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -291,7 +291,7 @@ void test_lis_with_duplicates_removed(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_large_dataset(void)
@@ -316,7 +316,7 @@ void test_lis_large_dataset(void)
     i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -326,7 +326,7 @@ void test_lis_large_dataset(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_lis_includes_position_zero(void)
@@ -345,13 +345,13 @@ void test_lis_includes_position_zero(void)
     compress(&a);
     calculate_lis(&a);
     
-    ASSERT_TRUE(a.in_LIS[0], "Position 0 is in LIS");
-    ASSERT_TRUE(a.in_LIS[1], "Position 1 is in LIS");
-    ASSERT_TRUE(a.in_LIS[2], "Position 2 is in LIS");
+    ASSERT_TRUE(a.in_lis[0], "Position 0 is in LIS");
+    ASSERT_TRUE(a.in_lis[1], "Position 1 is in LIS");
+    ASSERT_TRUE(a.in_lis[2], "Position 2 is in LIS");
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_count_non_lis(void)
@@ -375,7 +375,7 @@ void test_count_non_lis(void)
     int i = 0;
     while (i <= a.top)
     {
-        if (a.in_LIS[i])
+        if (a.in_lis[i])
             lis_count++;
         i++;
     }
@@ -385,7 +385,7 @@ void test_count_non_lis(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 void test_is_in_lis(void)
@@ -408,7 +408,7 @@ void test_is_in_lis(void)
     
     free(a.values);
     free(a.indices);
-    free(a.in_LIS);
+    free(a.in_lis);
 }
 
 int main(void)

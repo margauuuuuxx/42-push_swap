@@ -20,7 +20,7 @@ void	push(t_stack *src, t_stack *dst)
 	{
 		dst->values[++dst->top] = src->values[src->top];
 		dst->indices[dst->top] = src->indices[src->top];
-		dst->in_LIS[dst->top] = src->in_LIS[src->top--];
+		dst->in_lis[dst->top] = src->in_lis[src->top--];
 	}
 }
 
@@ -37,9 +37,9 @@ void	swap(t_stack *stack)
 	temp_int = stack->indices[stack->top];
 	stack->indices[stack->top] = stack->indices[stack->top - 1];
 	stack->indices[stack->top - 1] = temp_int;
-	temp_bool = stack->in_LIS[stack->top];
-	stack->in_LIS[stack->top] = stack->in_LIS[stack->top - 1];
-	stack->in_LIS[stack->top - 1] = temp_bool;
+	temp_bool = stack->in_lis[stack->top];
+	stack->in_lis[stack->top] = stack->in_lis[stack->top - 1];
+	stack->in_lis[stack->top - 1] = temp_bool;
 }
 
 void	rotate(t_stack *stack)
@@ -53,18 +53,18 @@ void	rotate(t_stack *stack)
 		return ;
 	tmp_val = stack->values[stack->top];
 	tmp_indices = stack->indices[stack->top];
-	tmp_LIS = stack->in_LIS[stack->top];
+	tmp_LIS = stack->in_lis[stack->top];
 	i = stack->top;
 	while (i > 0)
 	{
 		stack->values[i] = stack->values[i - 1];
 		stack->indices[i] = stack->indices[i - 1];
-		stack->in_LIS[i] = stack->in_LIS[i - 1];
+		stack->in_lis[i] = stack->in_lis[i - 1];
 		i--;
 	}
 	stack->values[0] = tmp_val;
 	stack->indices[0] = tmp_indices;
-	stack->in_LIS[0] = tmp_LIS;
+	stack->in_lis[0] = tmp_LIS;
 }
 
 void	reverse_rotate(t_stack *stack)
@@ -78,18 +78,18 @@ void	reverse_rotate(t_stack *stack)
 		return ;
 	temp_val = stack->values[0];
 	temp_indices = stack->indices[0];
-	temp_LIS = stack->in_LIS[0];
+	temp_LIS = stack->in_lis[0];
 	i = 0;
 	while (i < stack->top)
 	{
 		stack->values[i] = stack->values[i + 1];
 		stack->indices[i] = stack->indices[i + 1];
-		stack->in_LIS[i] = stack->in_LIS[i + 1];
+		stack->in_lis[i] = stack->in_lis[i + 1];
 		i++;
 	}
 	stack->values[stack->top] = temp_val;
 	stack->indices[stack->top] = temp_indices;
-	stack->in_LIS[stack->top] = temp_LIS;
+	stack->in_lis[stack->top] = temp_LIS;
 }
 
 void	rrr(t_algo *algo)

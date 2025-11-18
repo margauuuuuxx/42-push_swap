@@ -25,11 +25,6 @@
 #define YELLOW "\033[33m"
 #define RESET "\033[0m"
 
-// #ifdef DEBUG_MODE
-// # define DEBUG_LOG(fmt, ...) fprintf(stderr, fmt "\n", ##__VA_ARGS__)
-// #else
-// # define DEBUG_LOG(fmt, ...) ((void)0)
-// #endif
 
 // ***** algo *****
 int				init_algo(t_algo *algo, t_stack *a, t_stack *b);
