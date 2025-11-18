@@ -1,4 +1,28 @@
-#include "../includes/push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_large_stack.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/18 14:45:00 by marlonco          #+#    #+#             */
+/*   Updated: 2025/11/18 14:45:00 by marlonco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/push_swap.h"
+
+static int	calculate_cost(t_algo *algo, int i)
+{
+	int	cost_forward;
+	int	cost_backward;
+
+	cost_forward = algo->a->top - i;
+	cost_backward = i + 1;
+	if (cost_forward < cost_backward)
+		return (cost_forward);
+	return (cost_backward);
+}
 
 static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
 {
@@ -15,7 +39,7 @@ static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
 		if (!algo->a->in_lis[i] && algo->a->indices[i] >= ctx->target
 			&& algo->a->indices[i] < ctx->target + ctx->chunk_sz)
 		{
-			cost = (algo->a->top - i < i + 1) ? algo->a->top - i : i + 1;
+			cost = calculate_cost(algo, i);
 			if (cost < best_cost)
 			{
 				best_cost = cost;
@@ -50,57 +74,73 @@ static void	push_non_lis_to_b(t_algo *algo, int size)
 	}
 }
 
-static void	push_with_standard_chunking(t_algo *algo, int size)
+static void	init_chunk_ctx(t_chunk_ctx *ctx, int size)
 {
-	int	chunks;
-	int	chunk_sz;
-	int	target;
-	int	max_to_keep;
+	ctx->chunks = get_chunks(size);
+	ctx->chunk_sz = size / ctx->chunks;
+	ctx->target = 0;
+	ctx->max_to_keep = size - 3;
+}
+
+static int	find_best_in_chunk(t_algo *algo, t_chunk_ctx *ctx)
+{
 	int	i;
 	int	pos;
 	int	best_cost;
 	int	cost;
+
+	best_cost = INT_MAX;
+	pos = -1;
+	i = 0;
+	while (i <= algo->a->top)
+	{
+		if (algo->a->indices[i] < ctx->max_to_keep
+			&& algo->a->indices[i] >= ctx->target
+			&& algo->a->indices[i] < ctx->target + ctx->chunk_sz)
+		{
+			cost = calculate_cost(algo, i);
+			if (cost < best_cost)
+			{
+				best_cost = cost;
+				pos = i;
+			}
+		}
+		i++;
+	}
+	return (pos);
+}
+
+static void	rotate_if_threshold(t_algo *algo, t_chunk_ctx *ctx)
+{
 	int	threshold;
 
-	chunks = get_chunks(size);
-	chunk_sz = size / chunks;
-	target = 0;
-	max_to_keep = size - 3;
+	if (algo->b->top > 2)
+	{
+		threshold = ctx->target + (int)(ctx->chunk_sz * 0.50);
+		if (algo->b->indices[algo->b->top] < threshold)
+			rb(algo);
+	}
+}
+
+static void	push_with_standard_chunking(t_algo *algo, int size)
+{
+	t_chunk_ctx	ctx;
+	int			pos;
+
+	init_chunk_ctx(&ctx, size);
 	while (algo->b->top < size - 4)
 	{
-		best_cost = INT_MAX;
-		pos = -1;
-		i = 0;
-		while (i <= algo->a->top)
-		{
-			if (algo->a->indices[i] < max_to_keep
-				&& algo->a->indices[i] >= target && algo->a->indices[i] < target
-				+ chunk_sz)
-			{
-				cost = (algo->a->top - i < i + 1) ? algo->a->top - i : i + 1;
-				if (cost < best_cost)
-				{
-					best_cost = cost;
-					pos = i;
-				}
-			}
-			i++;
-		}
+		pos = find_best_in_chunk(algo, &ctx);
 		if (pos == -1)
 		{
-			target += chunk_sz;
-			if (target >= max_to_keep)
+			ctx.target += ctx.chunk_sz;
+			if (ctx.target >= ctx.max_to_keep)
 				break ;
 			continue ;
 		}
 		smart_rotate_to_top(algo->a, pos, algo, 'a');
 		pb(algo);
-		if (algo->b->top > 2)
-		{
-			threshold = target + (int)(chunk_sz * 0.50);
-			if (algo->b->indices[algo->b->top] < threshold)
-				rb(algo);
-		}
+		rotate_if_threshold(algo, &ctx);
 	}
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_large_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/18 14:45:00 by marlonco          #+#    #+#             */
+/*   Updated: 2025/11/18 14:45:00 by marlonco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
 int	get_chunks(int size)
@@ -45,6 +57,28 @@ void	rotate_b_if_needed(t_algo *algo, t_push_ctx *ctx)
 	}
 }
 
+static void	rotate_forward(t_algo *algo, char c, int count)
+{
+	while (count-- > 0)
+	{
+		if (c == 'a')
+			ra(algo);
+		else
+			rb(algo);
+	}
+}
+
+static void	rotate_backward(t_algo *algo, char c, int count)
+{
+	while (count-- > 0)
+	{
+		if (c == 'a')
+			rra(algo);
+		else
+			rrb(algo);
+	}
+}
+
 void	smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 {
 	int	cf;
@@ -55,9 +89,7 @@ void	smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 	if (pos == s->top)
 		return ;
 	if (cf <= cb)
-		while (cf-- > 0)
-			(c == 'a') ? ra(algo) : rb(algo);
+		rotate_forward(algo, c, cf);
 	else
-		while (cb-- > 0)
-			(c == 'a') ? rra(algo) : rrb(algo);
+		rotate_backward(algo, c, cb);
 }
