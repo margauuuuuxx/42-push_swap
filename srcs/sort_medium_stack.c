@@ -18,7 +18,7 @@ void smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 static int get_chunks(int size)
 {
     if (size <= 100)
-        return (6);
+        return (5);
     if (size <= 500)
         return (9);
     return (20);
@@ -82,5 +82,26 @@ void sort_medium_stack(t_algo *algo)
             sort_three(algo);
     }
     
-    push_back_to_a(algo);
+    if (size <= 100)
+    {
+        while (algo->b->top >= 0)
+        {
+            int mx_p = 0, mx_v = algo->b->indices[0];
+            i = 1;
+            while (i <= algo->b->top)
+            {
+                if (algo->b->indices[i] > mx_v)
+                {
+                    mx_v = algo->b->indices[i];
+                    mx_p = i;
+                }
+                i++;
+            }
+            smart_rotate_to_top(algo->b, mx_p, algo, 'b');
+            pa(algo);
+        }
+        final_rotate_to_min(algo);
+    }
+    else
+        push_back_to_a(algo);
 }
