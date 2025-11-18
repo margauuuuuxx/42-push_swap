@@ -28,7 +28,7 @@ int calculate_chunk_count(int elements)
     if (elements <= 3)
         return (1);
     else if (elements <= 100)
-        return ((int)(sqrt(elements)));
+        return ((int)(sqrt(elements))); // SEE IF I CAN USE SOMETHING ELSE THAN SQRT BC IN MATH LIB 
     else if (elements <= 500)
         return ((int)(sqrt(elements) + 16));
     else 

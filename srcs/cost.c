@@ -126,7 +126,7 @@ t_cost  find_cheapest_move(t_algo *algo)
     t_cost  current;
     int     i;
 
-    cheapest.total = INT16_MAX;
+    cheapest.total = INT_MAX;
     i = 0;
     while (i <= algo->b->top)
     {

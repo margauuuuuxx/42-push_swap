@@ -29,7 +29,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo -e "Compiling push_swap..."
-	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -lm -o $(NAME)
 	@echo -e "\033[32mDone!\033[0m"
 
 # bonus: $(PRINTF_LIB) $(OBJS_BONUS) $(OBJS_COMMON)
