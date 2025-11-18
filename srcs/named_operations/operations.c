@@ -46,14 +46,14 @@ void	rotate(t_stack *stack)
 {
 	int		tmp_val;
 	int		tmp_indices;
-	bool	tmp_LIS;
+	bool	tmp_lis;
 	int		i;
 
 	if (stack->top < 1)
 		return ;
 	tmp_val = stack->values[stack->top];
 	tmp_indices = stack->indices[stack->top];
-	tmp_LIS = stack->in_lis[stack->top];
+	tmp_lis = stack->in_lis[stack->top];
 	i = stack->top;
 	while (i > 0)
 	{
@@ -64,21 +64,21 @@ void	rotate(t_stack *stack)
 	}
 	stack->values[0] = tmp_val;
 	stack->indices[0] = tmp_indices;
-	stack->in_lis[0] = tmp_LIS;
+	stack->in_lis[0] = tmp_lis;
 }
 
 void	reverse_rotate(t_stack *stack)
 {
 	int		temp_val;
 	int		temp_indices;
-	bool	temp_LIS;
+	bool	temp_lis;
 	int		i;
 
 	if (stack->top < 1)
 		return ;
 	temp_val = stack->values[0];
 	temp_indices = stack->indices[0];
-	temp_LIS = stack->in_lis[0];
+	temp_lis = stack->in_lis[0];
 	i = 0;
 	while (i < stack->top)
 	{
@@ -89,7 +89,7 @@ void	reverse_rotate(t_stack *stack)
 	}
 	stack->values[stack->top] = temp_val;
 	stack->indices[stack->top] = temp_indices;
-	stack->in_lis[stack->top] = temp_LIS;
+	stack->in_lis[stack->top] = temp_lis;
 }
 
 void	rrr(t_algo *algo)
