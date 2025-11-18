@@ -12,93 +12,94 @@
 
 #include "../includes/push_swap.h"
 
-static void    merge(int *arr, int *temp, t_merge *m)
+static void	merge(int *arr, int *temp, t_merge *m)
 {
-    int i;
-    int j;
-    int k;
+	int	i;
+	int	j;
+	int	k;
 
-    i = m->left;
-    while (i <= m->right)
-    {
-        temp[i] = arr[i];
-        i++;
-    }
-    i = m->left;
-    j = m->mid + 1;
-    k = m->left;
-    while (i <= m->mid && j <= m->right)
-    {
-        if (temp[i] <= temp[j])
-            arr[k++] = temp[i++];
-        else 
-            arr[k++] = temp[j++];
-    }
-    while (i <= m->mid)
-        arr[k++] = temp[i++];
-    while (j <= m->right)
-        arr[k++] = temp[j++];
+	i = m->left;
+	while (i <= m->right)
+	{
+		temp[i] = arr[i];
+		i++;
+	}
+	i = m->left;
+	j = m->mid + 1;
+	k = m->left;
+	while (i <= m->mid && j <= m->right)
+	{
+		if (temp[i] <= temp[j])
+			arr[k++] = temp[i++];
+		else
+			arr[k++] = temp[j++];
+	}
+	while (i <= m->mid)
+		arr[k++] = temp[i++];
+	while (j <= m->right)
+		arr[k++] = temp[j++];
 }
 
-void    merge_sort(int *arr, int *temp, int left, int right) 
+void	merge_sort(int *arr, int *temp, int left, int right)
 {
-    t_merge m;
-    int     mid;
+	t_merge	m;
+	int		mid;
 
-    m.left = left;
-    m.right = right;
-    if (left < right)
-    {
-        mid = left + (right - left) / 2;
-        m.mid = mid;
-        merge_sort(arr, temp, left, mid);
-        merge_sort(arr, temp, mid + 1, right);
-        merge(arr, temp, &m);
-    }
+	m.left = left;
+	m.right = right;
+	if (left < right)
+	{
+		mid = left + (right - left) / 2;
+		m.mid = mid;
+		merge_sort(arr, temp, left, mid);
+		merge_sort(arr, temp, mid + 1, right);
+		merge(arr, temp, &m);
+	}
 }
 
-int binary_search(int *sorted, int size, int target)
+int	binary_search(int *sorted, int size, int target)
 {
-    t_merge m;
+	t_merge	m;
 
-    m.left = 0;
-    m.right = size - 1;
-    while (m.left <= m.right)
-    {
-        m.mid = m.left + (m.right - m.left) / 2;
-        if (sorted[m.mid] == target)
-            return (m.mid);
-        else if (sorted[m.mid] < target)
-            m.left = m.mid + 1;
-        else 
-            m.right = m.mid - 1;
-    }
-    return (-1);
+	m.left = 0;
+	m.right = size - 1;
+	while (m.left <= m.right)
+	{
+		m.mid = m.left + (m.right - m.left) / 2;
+		if (sorted[m.mid] == target)
+			return (m.mid);
+		else if (sorted[m.mid] < target)
+			m.left = m.mid + 1;
+		else
+			m.right = m.mid - 1;
+	}
+	return (-1);
 }
 
-static void map(int *sorted_cpy, t_stack *a) {
-    int i;
+static void	map(int *sorted_cpy, t_stack *a)
+{
+	int	i;
 
-    i = 0;
-    while (i <= a->top)
-    {
-        a->indices[i] = binary_search(sorted_cpy, a->top + 1, a->values[i]);
-        i++;
-    }
+	i = 0;
+	while (i <= a->top)
+	{
+		a->indices[i] = binary_search(sorted_cpy, a->top + 1, a->values[i]);
+		i++;
+	}
 }
 
-void    compress(t_stack *a)
+void	compress(t_stack *a)
 {
-    int *cpy;
-    int *temp;
+	int	*cpy;
+	int	*temp;
 
-    cpy = malloc(a->capacity * sizeof(int));
-    temp = malloc(a->capacity * sizeof(int));
-    if (!cpy || !temp)
-        return;
-    copy_stack(cpy, a);
-    merge_sort(cpy, temp, 0, a->top);
-    map(cpy, a);
-    free(cpy);
-    free(temp);
+	cpy = malloc(a->capacity * sizeof(int));
+	temp = malloc(a->capacity * sizeof(int));
+	if (!cpy || !temp)
+		return ;
+	copy_stack(cpy, a);
+	merge_sort(cpy, temp, 0, a->top);
+	map(cpy, a);
+	free(cpy);
+	free(temp);
 }

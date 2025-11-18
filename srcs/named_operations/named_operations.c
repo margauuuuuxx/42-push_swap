@@ -12,43 +12,42 @@
 
 #include "../../includes/push_swap.h"
 
-void    pa(t_algo *algo)
+void	pa(t_algo *algo)
 {
-    if (algo->b->top < 0)
-        return;
-    push(algo->b, algo->a);
-    if (write(1, "pa\n", 3) < 0)
-        return;
+	if (algo->b->top < 0)
+		return ;
+	push(algo->b, algo->a);
+	if (write(1, "pa\n", 3) < 0)
+		return ;
 }
 
-void    pb(t_algo *algo)
+void	pb(t_algo *algo)
 {
-    if (algo->a->top < 0)
-        return;
-    push(algo->a, algo->b);
-    if (write(1, "pb\n", 3) < 0)
-        return;
+	if (algo->a->top < 0)
+		return ;
+	push(algo->a, algo->b);
+	if (write(1, "pb\n", 3) < 0)
+		return ;
 }
 
-void    sa(t_algo *algo)
+void	sa(t_algo *algo)
 {
-    swap(algo->a);
-    if (write(1, "sa\n", 3) < 0)
-        return;
+	swap(algo->a);
+	if (write(1, "sa\n", 3) < 0)
+		return ;
 }
 
-void    sb(t_algo *algo)
+void	sb(t_algo *algo)
 {
-    swap(algo->b);
-    if (write(1, "sb\n", 3) < 0)
-        return;
+	swap(algo->b);
+	if (write(1, "sb\n", 3) < 0)
+		return ;
 }
 
-void    ss(t_algo *algo)
+void	ss(t_algo *algo)
 {
-    swap(algo->a);
-    swap(algo->b);
-    if (write(1, "ss\n", 3) < 0)
-        return;
+	swap(algo->a);
+	swap(algo->b);
+	if (write(1, "ss\n", 3) < 0)
+		return ;
 }
-

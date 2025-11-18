@@ -12,131 +12,134 @@
 
 #include "../includes/push_swap.h"
 
-static size_t   split_len(char **str) {
-    size_t i;
+static size_t	split_len(char **str)
+{
+	size_t	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void    push_element(t_stack *s, int nbr)
+void	push_element(t_stack *s, int nbr)
 {
-    if (s->top + 1 < s->capacity)
-    {
-        s->values[++s->top] = nbr;
-        s->indices[s->top] = -1;
-        s->in_LIS[s->top] = false;
-    }
+	if (s->top + 1 < s->capacity)
+	{
+		s->values[++s->top] = nbr;
+		s->indices[s->top] = -1;
+		s->in_LIS[s->top] = false;
+	}
 }
 
-static bool no_duplicates(t_stack *s)
+static bool	no_duplicates(t_stack *s)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (i < s->top)
-    {
-        j = i + 1;
-        while (j <= s->top)
-        {
-            if (s->values[i] == s->values[j])
-                return (false);
-            j++;
-        }
-        i++;
-    }
-    return (true);
+	i = 0;
+	while (i < s->top)
+	{
+		j = i + 1;
+		while (j <= s->top)
+		{
+			if (s->values[i] == s->values[j])
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }
 
-static bool validate_char(char c, int pos, int *count)
+static bool	validate_char(char c, int pos, int *count)
 {
-    if ((c < '0' || c > '9') && (c != '+' && c != '-'))
-        return (false);
-    if (*count > 1)
-        return (false);
-    if (c == '+' || c == '-')
-    {
-        if (pos != 0)
-            return (false);
-        (*count)++;
-    }
-    return (true);
+	if ((c < '0' || c > '9') && (c != '+' && c != '-'))
+		return (false);
+	if (*count > 1)
+		return (false);
+	if (c == '+' || c == '-')
+	{
+		if (pos != 0)
+			return (false);
+		(*count)++;
+	}
+	return (true);
 }
 
-static bool validate_string(char *str)
+static bool	validate_string(char *str)
 {
-    int j;
-    int count;
+	int	j;
+	int	count;
 
-    if (!str || str[0] == '\0')
-        return (false);
-    j = ft_strlen(str) - 1;
-    count = 0;
-    while (j >= 0)
-    {
-        if (!validate_char(str[j], j, &count))
-            return (false);
-        j--;
-    }
-    return (true);
+	if (!str || str[0] == '\0')
+		return (false);
+	j = ft_strlen(str) - 1;
+	count = 0;
+	while (j >= 0)
+	{
+		if (!validate_char(str[j], j, &count))
+			return (false);
+		j--;
+	}
+	return (true);
 }
 
-static bool validate_all_strings(char **str, size_t len)
+static bool	validate_all_strings(char **str, size_t len)
 {
-    int i;
+	int	i;
 
-    if (len == 0)
-        return (false);
-    i = 0;
-    while (i < (int)len)
-    {
-        if (!validate_string(str[i]))
-            return (false);
-        i++;
-    }
-    return (true);
+	if (len == 0)
+		return (false);
+	i = 0;
+	while (i < (int)len)
+	{
+		if (!validate_string(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-static void fill_stack(char **str, t_stack *s, size_t len)
+static void	fill_stack(char **str, t_stack *s, size_t len)
 {
-    int i;
+	int	i;
 
-    i = (int)len - 1;
-    while (i >= 0)
-    {
-        push_element(s, ft_atoi(str[i]));
-        i--;
-    }
+	i = (int)len - 1;
+	while (i >= 0)
+	{
+		push_element(s, ft_atoi(str[i]));
+		i--;
+	}
 }
 
-static bool is_valid(char **str, t_stack *s, size_t len)
+static bool	is_valid(char **str, t_stack *s, size_t len)
 {
-    if (!validate_all_strings(str, len))
-        return (false);
-    fill_stack(str, s, len);
-    return (no_duplicates(s));
+	if (!validate_all_strings(str, len))
+		return (false);
+	fill_stack(str, s, len);
+	return (no_duplicates(s));
 }
 
-bool    parse(t_stack *a, t_stack *b, int argc, char **argv)
+bool	parse(t_stack *a, t_stack *b, int argc, char **argv)
 {
-    char    **split_str;
-    size_t  capacity;
+	char	**split_str;
+	size_t	capacity;
 
-    if (argc == 2) {
-        split_str = ft_split(argv[1], ' ');
-        capacity = split_len(split_str);
-    }
-    else {
-        split_str = &argv[1];
-        capacity = argc - 1;
-    }
-    if (!init_stack(a, capacity) || !init_stack(b, capacity))
-    {
-        DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
-        return (false);
-    }
-    return (is_valid(split_str, a, capacity));
+	if (argc == 2)
+	{
+		split_str = ft_split(argv[1], ' ');
+		capacity = split_len(split_str);
+	}
+	else
+	{
+		split_str = &argv[1];
+		capacity = argc - 1;
+	}
+	if (!init_stack(a, capacity) || !init_stack(b, capacity))
+	{
+		DEBUG_LOG("%sError: %sMalloc failure in init_t_stacks", RED, RESET);
+		return (false);
+	}
+	return (is_valid(split_str, a, capacity));
 }

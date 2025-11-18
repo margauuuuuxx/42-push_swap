@@ -12,19 +12,19 @@
 
 #include "../includes/push_swap.h"
 
-void    insert_all_from_b(t_algo *algo)
+void	insert_all_from_b(t_algo *algo)
 {
-    t_cost  cheapest;
+	t_cost	cheapest;
 
-    while (algo->b->top >= 0)
-    {
-        cheapest = find_cheapest_move(algo);
-        execute_move(algo, &cheapest);
-    }
+	while (algo->b->top >= 0)
+	{
+		cheapest = find_cheapest_move(algo);
+		execute_move(algo, &cheapest);
+	}
 }
 
-void    push_back_to_a(t_algo *algo)
+void	push_back_to_a(t_algo *algo)
 {
-    insert_all_from_b(algo);
-    final_rotate_to_min(algo);
+	insert_all_from_b(algo);
+	final_rotate_to_min(algo);
 }

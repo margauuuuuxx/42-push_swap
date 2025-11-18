@@ -19,8 +19,8 @@ int	ft_atoi(const char *str)
 	int	res;
 
 	i = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\f'
+		|| str[i] == '\r' || str[i] == ' ')
 		i++;
 	if (str[i] == '-')
 		is_neg = -1;
@@ -38,30 +38,33 @@ int	ft_atoi(const char *str)
 	return (res * is_neg);
 }
 
-size_t  ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void	output_message(char *str) {
-	size_t len;
+void	output_message(char *str)
+{
+	size_t	len;
 
 	len = ft_strlen(str);
 	if (!write(2, str, len))
-		return;
+		return ;
 }
 
-void copy_stack(int *cpy, t_stack *a) {
-    int i;
+void	copy_stack(int *cpy, t_stack *a)
+{
+	int	i;
 
-    i = 0;
-    while (i <= a->top) {
-        cpy[i] = a->values[i];
-        i++;
-    }
+	i = 0;
+	while (i <= a->top)
+	{
+		cpy[i] = a->values[i];
+		i++;
+	}
 }

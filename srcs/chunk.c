@@ -12,53 +12,53 @@
 
 #include "../includes/push_swap.h"
 
-void    free_chunk_array(t_chunk_array *chunks)
+void	free_chunk_array(t_chunk_array *chunks)
 {
-    if (!chunks)
-        return;
-    if (chunks->chunks)
-        free(chunks->chunks); // CHECK WHY NOT CHUNKS[I]
-    free(chunks);
+	if (!chunks)
+		return ;
+	if (chunks->chunks)
+		free(chunks->chunks); // CHECK WHY NOT CHUNKS[I]
+	free(chunks);
 }
 
-int calculate_chunk_count(int elements)
+int	calculate_chunk_count(int elements)
 {
-    int optimal_chunks;
-    
-    if (elements <= 3)
-        return (1);
-    optimal_chunks = (int)(sqrt(elements) * 1.2);
-    if (optimal_chunks < 3)
-        optimal_chunks = 3;
-    return (optimal_chunks);
+	int	optimal_chunks;
+
+	if (elements <= 3)
+		return (1);
+	optimal_chunks = (int)(sqrt(elements) * 1.2);
+	if (optimal_chunks < 3)
+		optimal_chunks = 3;
+	return (optimal_chunks);
 }
 
-void    get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
+void	get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
 {
-    int i;
-    int first_found;
+	int	i;
+	int	first_found;
 
-    *min_idx = a->capacity;
-    *max_idx = -1;
-    first_found = 0;
-    i = 0;
-    while (i <= a->top)
-    {
-        if (!a->in_LIS[i])
-        {
-            if (a->indices[i] < *min_idx)
-                *min_idx = a->indices[i];
-            if (a->indices[i] > *max_idx)
-                *max_idx = a->indices[i];
-            first_found = 1;
-        }
-        i++;
-    }
-    if (!first_found)
-    {
-        *min_idx = 0;
-        *max_idx = 0;
-    }
+	*min_idx = a->capacity;
+	*max_idx = -1;
+	first_found = 0;
+	i = 0;
+	while (i <= a->top)
+	{
+		if (!a->in_LIS[i])
+		{
+			if (a->indices[i] < *min_idx)
+				*min_idx = a->indices[i];
+			if (a->indices[i] > *max_idx)
+				*max_idx = a->indices[i];
+			first_found = 1;
+		}
+		i++;
+	}
+	if (!first_found)
+	{
+		*min_idx = 0;
+		*max_idx = 0;
+	}
 }
 
 // bool    is_in_chunk(int idx, t_chunk *chunk)
@@ -82,55 +82,55 @@ void    get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
 //     return (-1);
 // }
 
-static void init_chunk_array(t_chunk_array *chunks, int min_idx, int max_idx)
+static void	init_chunk_array(t_chunk_array *chunks, int min_idx, int max_idx)
 {
-    chunks->range = max_idx - min_idx + 1;
-    chunks->size = chunks->range / chunks->count;
-    if (chunks->size < 1)
-        chunks->size = 1;
+	chunks->range = max_idx - min_idx + 1;
+	chunks->size = chunks->range / chunks->count;
+	if (chunks->size < 1)
+		chunks->size = 1;
 }
 
-static void fill_chunks(t_chunk_array *chunks, int min_idx, int max_idx)
+static void	fill_chunks(t_chunk_array *chunks, int min_idx, int max_idx)
 {
-    int current_min;
-    int i;
+	int	current_min;
+	int	i;
 
-    current_min = min_idx;
-    i = 0;
-    while (i < chunks->count)
-    {
-        chunks->chunks[i].min_idx = current_min;
-        if (i == chunks->count - 1)
-            chunks->chunks[i].max_idx = max_idx;
-        else
-            chunks->chunks[i].max_idx = current_min + chunks->size - 1;
-        chunks->chunks[i].size = chunks->chunks[i].max_idx
-            - chunks->chunks[i].min_idx + 1;
-        current_min = chunks->chunks[i].max_idx + 1;
-        i++;
-    }
+	current_min = min_idx;
+	i = 0;
+	while (i < chunks->count)
+	{
+		chunks->chunks[i].min_idx = current_min;
+		if (i == chunks->count - 1)
+			chunks->chunks[i].max_idx = max_idx;
+		else
+			chunks->chunks[i].max_idx = current_min + chunks->size - 1;
+		chunks->chunks[i].size = chunks->chunks[i].max_idx
+			- chunks->chunks[i].min_idx + 1;
+		current_min = chunks->chunks[i].max_idx + 1;
+		i++;
+	}
 }
 
-t_chunk_array *create_chunk(t_stack *a)
+t_chunk_array	*create_chunk(t_stack *a)
 {
-    int             min_idx;
-    int             max_idx;
-    t_chunk_array   *chunks;
+	int				min_idx;
+	int				max_idx;
+	t_chunk_array	*chunks;
 
-    if (a->not_in_lis == 0)
-        return (NULL);
-    chunks = malloc(sizeof(t_chunk_array));
-    if (!chunks)
-        return (NULL);
-    chunks->count = calculate_chunk_count(a->not_in_lis);
-    get_non_lis_range(a, &min_idx, &max_idx);
-    init_chunk_array(chunks, min_idx, max_idx);
-    chunks->chunks = malloc((chunks->count) * sizeof(t_chunk));
-    if (!chunks->chunks)
-    {
-        free(chunks);
-        return (NULL);
-    }
-    fill_chunks(chunks, min_idx, max_idx);
-    return (chunks);
+	if (a->not_in_lis == 0)
+		return (NULL);
+	chunks = malloc(sizeof(t_chunk_array));
+	if (!chunks)
+		return (NULL);
+	chunks->count = calculate_chunk_count(a->not_in_lis);
+	get_non_lis_range(a, &min_idx, &max_idx);
+	init_chunk_array(chunks, min_idx, max_idx);
+	chunks->chunks = malloc((chunks->count) * sizeof(t_chunk));
+	if (!chunks->chunks)
+	{
+		free(chunks);
+		return (NULL);
+	}
+	fill_chunks(chunks, min_idx, max_idx);
+	return (chunks);
 }

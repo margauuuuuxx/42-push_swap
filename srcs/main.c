@@ -12,29 +12,30 @@
 
 #include "../includes/push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_stack         a;
-    t_stack         b;
-    t_algo          algo;
+	t_stack	a;
+	t_stack	b;
+	t_algo	algo;
 
-    if (argc < 2)
-        return (0);
-    if (!parse(&a, &b, argc, argv))
-        return (output_message("Error: Invalid character in argument ...\n"), 1);
-    compress(&a);
-    if (is_sorted(&a))
-    {
-        free_stack(&a);
-        free_stack(&b);
-        return (0);
-    }
-    calculate_lis(&a);
-    if (init_algo(&algo, &a, &b))
-        return (output_message("Error: Init algo\n"), 1);
-    sort(&algo);
-    free_chunk_array(algo.chunks);
-    free_stack(&a);
-    free_stack(&b);
-    return (0);
+	if (argc < 2)
+		return (0);
+	if (!parse(&a, &b, argc, argv))
+		return (output_message("Error: Invalid character in argument ...\n"),
+			1);
+	compress(&a);
+	if (is_sorted(&a))
+	{
+		free_stack(&a);
+		free_stack(&b);
+		return (0);
+	}
+	calculate_lis(&a);
+	if (init_algo(&algo, &a, &b))
+		return (output_message("Error: Init algo\n"), 1);
+	sort(&algo);
+	free_chunk_array(algo.chunks);
+	free_stack(&a);
+	free_stack(&b);
+	return (0);
 }
