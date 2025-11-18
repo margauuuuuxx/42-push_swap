@@ -294,15 +294,6 @@ done | awk '{sum+=$1; count++} END {print "Average:", sum/count}'
 ./push_swap $(shuf -i 1-100 -n 100) | ./visualizer
 ```
 
-**Debug mode (if enabled):**
-```bash
-# Compile with debug flags
-make DEBUG_MODE=1
-
-# Run with debug output
-./push_swap "3 2 1"
-```
-
 ## 📂 Project Structure
 
 ```

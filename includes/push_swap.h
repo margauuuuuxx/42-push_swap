@@ -56,14 +56,17 @@ void			final_rotate_to_min(t_algo *algo);
 void			push_back_to_a(t_algo *algo);
 
 // ***** lis *****
-t_lis			*init_lis(int size);
-void			free_lis(t_lis *lis);
-int				lis_binary_search(int *tail, int len, int target);
 void			compute_lis(t_lis *lis, int *indices, int size);
 void			mark_lis_els(t_stack *a, t_lis *lis);
 void			calculate_lis(t_stack *a);
-void			count_non_lis(t_stack *a);
 bool			is_in_lis(t_stack *a, int pos);
+
+// ***** lis utils *****
+t_lis			*init_lis(int size);
+void	        get_non_lis_range(t_stack *a, int *min_idx, int *max_idx);
+void			free_lis(t_lis *lis);
+void			count_non_lis(t_stack *a);
+int				lis_binary_search(int *tail, int len, int target);
 
 // ***** named operations *****
 void			pa(t_algo *algo);
@@ -86,8 +89,17 @@ void			rotate(t_stack *stack);
 void			reverse_rotate(t_stack *stack);
 void			rrr(t_algo *algo);
 
-// ***** t_stack utils *****
+// ***** parsing utils *****
+size_t	split_len(char **str);
+bool	is_valid(char **str, t_stack *s, size_t len);
+
+// ***** parsing *****
+void	        push_element(t_stack *s, int nbr);
+bool 	        validate_all_strings(char **str, size_t len);
 bool			parse(t_stack *a, t_stack *b, int argc, char **argv);
+
+
+// ***** t_stack utils *****
 int				init_stack(t_stack *s, int capacity);
 void			free_stack(t_stack *s);
 

@@ -26,36 +26,44 @@ int	init_algo(t_algo *algo, t_stack *a, t_stack *b)
 	return (0);
 }
 
-void	rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
+static void	case1_rotation(t_stack *s, int pos, t_algo *algo, char c)
 {
 	int	rotation;
 
+	rotation = s->top - pos;
+	while (rotation > 0)
+	{
+		if (c == 'a')
+			ra(algo);
+		else
+			rb(algo);
+		rotation--;
+	}
+}
+
+static void	case2_rotation(int pos, t_algo *algo, char c)
+{
+	int	rotation;
+
+	rotation = pos + 1;
+	while (rotation > 0)
+	{
+		if (c == 'a')
+			rra(algo);
+		else
+			rrb(algo);
+		rotation--;
+	}
+}
+
+void	rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
+{
 	if (pos == s->top)
 		return ;
 	if (pos > s->top / 2)
-	{
-		rotation = s->top - pos;
-		while (rotation > 0)
-		{
-			if (c == 'a')
-				ra(algo);
-			else
-				rb(algo);
-			rotation--;
-		}
-	}
+		case1_rotation(s, pos, algo, c);
 	else
-	{
-		rotation = pos + 1;
-		while (rotation > 0)
-		{
-			if (c == 'a')
-				rra(algo);
-			else
-				rrb(algo);
-			rotation--;
-		}
-	}
+		case2_rotation(pos, algo, c);
 }
 
 void	sort(t_algo *algo)

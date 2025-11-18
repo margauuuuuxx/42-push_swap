@@ -33,55 +33,6 @@ int	calculate_chunk_count(int elements)
 	return (optimal_chunks);
 }
 
-void	get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)
-{
-	int	i;
-	int	first_found;
-
-	*min_idx = a->capacity;
-	*max_idx = -1;
-	first_found = 0;
-	i = 0;
-	while (i <= a->top)
-	{
-		if (!a->in_lis[i])
-		{
-			if (a->indices[i] < *min_idx)
-				*min_idx = a->indices[i];
-			if (a->indices[i] > *max_idx)
-				*max_idx = a->indices[i];
-			first_found = 1;
-		}
-		i++;
-	}
-	if (!first_found)
-	{
-		*min_idx = 0;
-		*max_idx = 0;
-	}
-}
-
-// bool    is_in_chunk(int idx, t_chunk *chunk)
-// {
-//     if (idx >= chunk->min_idx && idx <= chunk->max_idx)
-//         return (true);
-//     return (false);
-// }
-
-// int find_corresponding_chunk(int idx, t_chunk *chunks, int chunk_count)
-// {
-//     int i;
-
-//     i =0;
-//     while (i < chunk_count)
-//     {
-//         if (is_in_chunk(idx, &chunks[i]))
-//             return (i);
-//         i++;
-//     }
-//     return (-1);
-// }
-
 static void	init_chunk_array(t_chunk_array *chunks, int min_idx, int max_idx)
 {
 	chunks->range = max_idx - min_idx + 1;
