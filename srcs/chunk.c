@@ -23,14 +23,14 @@ void    free_chunk_array(t_chunk_array *chunks)
 
 int calculate_chunk_count(int elements)
 {
+    int optimal_chunks;
+    
     if (elements <= 3)
         return (1);
-    else if (elements <= 100)
-        return ((int)(sqrt(elements))); // SEE IF I CAN USE SOMETHING ELSE THAN SQRT BC IN MATH LIB 
-    else if (elements <= 500)
-        return ((int)(sqrt(elements) + 16));
-    else 
-        return ((int)(sqrt(elements) + 20));
+    optimal_chunks = (int)(sqrt(elements) * 1.2);
+    if (optimal_chunks < 3)
+        optimal_chunks = 3;
+    return (optimal_chunks);
 }
 
 void    get_non_lis_range(t_stack *a, int *min_idx, int *max_idx)

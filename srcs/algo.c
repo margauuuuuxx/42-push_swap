@@ -40,15 +40,39 @@ bool    chunk_has_elements_in_a(t_stack *a, t_chunk *chunk)
     return (false);
 }
 
-int find_closest_chunk_elements(t_stack *a, t_chunk *chunk)
+static int calculate_b_median(t_stack *b)
+{
+    int sum;
+    int count;
+    int i;
+    
+    if (b->top < 0)
+        return (0);
+    sum = 0;
+    count = 0;
+    i = 0;
+    while (i <= b->top)
+    {
+        sum += b->indices[i];
+        count++;
+        i++;
+    }
+    return (sum / count);
+}
+
+int find_closest_chunk_elements(t_stack *a, t_chunk *chunk, t_stack *b)
 {
     int i;
     int closest_pos;
     int min_cost;
     int cost;
+    int future_cost;
+    int median_b;
+    int total_cost;
 
     closest_pos = -1;
-    min_cost = a->top + 1;
+    min_cost = INT_MAX;
+    median_b = calculate_b_median(b);
     i = 0;
     while (i <= a->top)
     {
@@ -58,9 +82,11 @@ int find_closest_chunk_elements(t_stack *a, t_chunk *chunk)
                 cost = a->top - i;
             else 
                 cost = i + 1;
-            if (cost < min_cost)
+            future_cost = abs(a->indices[i] - median_b) / 2;
+            total_cost = cost + future_cost;
+            if (total_cost < min_cost)
             {
-                min_cost = cost;
+                min_cost = total_cost;
                 closest_pos = i;
             }
         }
@@ -104,11 +130,15 @@ void    rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
 bool    should_rotate_b(t_stack *b, t_chunk *chunk)
 {
     int pushed;
-    int median;
+    int threshold;
+    int chunk_range;
 
+    if (b->top <= 2)
+        return (false);
     pushed = b->indices[b->top];
-    median = (chunk->min_idx + chunk->max_idx) / 2;
-    return (pushed < median);
+    chunk_range = chunk->max_idx - chunk->min_idx;
+    threshold = chunk->min_idx + (int)(chunk_range * 0.35);
+    return (pushed < threshold);
 }
 
 void    smart_rotation_push(t_algo *algo, t_chunk *chunk)
@@ -117,7 +147,7 @@ void    smart_rotation_push(t_algo *algo, t_chunk *chunk)
     
     while (chunk_has_elements_in_a(algo->a, chunk))
     {
-        el_idx = find_closest_chunk_elements(algo->a, chunk);
+        el_idx = find_closest_chunk_elements(algo->a, chunk, algo->b);
         if (el_idx == -1)
             break;
         rotate_to_top(algo->a, el_idx, algo, 'a');
