@@ -113,8 +113,14 @@ int				find_index_pos(t_stack *s, int target_idx);
 void			push_to_b_optimized(t_algo *algo, int pos);
 void			sort_small_stack(t_algo *algo);
 
-// ***** sort medium stack *****
+// ***** sort large stack *****
 void			sort_medium_stack(t_algo *algo);
+
+// ***** sort large utils *****
+int	            get_chunks(int size);
+void	        init_push_ctx(t_push_ctx *ctx, int size);
+void	        sort_remaining_in_a(t_algo *algo);
+void            rotate_b_if_needed(t_algo *algo, t_push_ctx *ctx);
 
 // ***** split *****
 char			**ft_split(char const *s, char c);

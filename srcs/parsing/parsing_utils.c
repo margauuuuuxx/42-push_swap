@@ -32,14 +32,14 @@ static bool	no_duplicates(t_stack *s)
 
 static void	fill_stack(char **str, t_stack *s, size_t len)
 {
-    int	i;
+	int	i;
 
-    i = (int)len - 1;
-    while (i >= 0)
-    {
-        push_element(s, ft_atoi(str[i]));
-        i--;
-    }
+	i = (int)len - 1;
+	while (i >= 0)
+	{
+		push_element(s, ft_atoi(str[i]));
+		i--;
+	}
 }
 
 bool	is_valid(char **str, t_stack *s, size_t len)

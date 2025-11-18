@@ -81,3 +81,12 @@ typedef struct s_merge
 	int				right;
 	int				mid;
 }	t_merge;
+
+typedef struct s_push_ctx
+{
+	int		chunks;
+	int		chunk_sz;
+	int		target;
+	int		pushed_count;
+	int		target_push_count;
+}			t_push_ctx;

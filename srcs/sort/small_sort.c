@@ -28,17 +28,15 @@ bool	is_sorted(t_stack *s)
 
 void	sort_three(t_algo *algo)
 {
-	t_stack	*a;
 	int		top;
 	int		mid;
 	int		bottom;
 
-	a = algo->a;
-	if (is_sorted(a))
+	if (is_sorted(algo->a))
 		return ;
-	top = a->values[a->top];
-	mid = a->values[a->top - 1];
-	bottom = a->values[0];
+	top = algo->a->values[algo->a->top];
+	mid = algo->a->values[algo->a->top - 1];
+	bottom = algo->a->values[0];
 	if (top > mid && mid < bottom && top < bottom)
 		sa(algo);
 	else if (top > mid && mid > bottom)

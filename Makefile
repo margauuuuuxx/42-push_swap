@@ -7,10 +7,10 @@ SRCS 		=	srcs/main.c \
 				srcs/lis/lis_utils.c srcs/lis/lis.c \
 				srcs/named_operations/named_operations.c srcs/named_operations/named_operations2.c srcs/named_operations/operations.c \
 				srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
+				srcs/sort/small_sort.c srcs/sort/sort_large_stack.c srcs/sort/sort_large_utils.c srcs/sort/sort_small_stack.c \
 				srcs/utils/split.c srcs/utils/stack_utils.c srcs/utils/utils.c \
 				srcs/algo.c srcs/chunk.c srcs/compress.c srcs/cost.c \
-				srcs/final_rotate.c srcs/insertion.c \
-				srcs/small_sort.c srcs/sort_medium_stack.c srcs/sort_small_stack.c
+				srcs/final_rotate.c srcs/insertion.c 
 
 # Test configuration
 TEST_DIR	= tests

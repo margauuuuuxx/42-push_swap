@@ -1,55 +1,11 @@
 #include "../includes/push_swap.h"
 
-void	smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
-{
-	int	cf;
-	int	cb;
-
-	cf = s->top - pos;
-	cb = pos + 1;
-	if (pos == s->top)
-		return ;
-	if (cf <= cb)
-		while (cf-- > 0)
-			(c == 'a') ? ra(algo) : rb(algo);
-	else
-		while (cb-- > 0)
-			(c == 'a') ? rra(algo) : rrb(algo);
-}
-
-static int	get_chunks(int size)
-{
-	if (size <= 100)
-		return (5);
-	if (size <= 500)
-		return (9);
-	return (20);
-}
-
-typedef struct s_push_ctx
-{
-	int		chunks;
-	int		chunk_sz;
-	int		target;
-	int		pushed_count;
-	int		target_push_count;
-}			t_push_ctx;
-
-static void	init_push_ctx(t_push_ctx *ctx, int size)
-{
-	ctx->chunks = get_chunks(size);
-	ctx->chunk_sz = size / ctx->chunks;
-	ctx->target = 0;
-	ctx->pushed_count = 0;
-	ctx->target_push_count = size - 3;
-}
-
 static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
 {
 	int	i;
 	int	pos;
 	int	best_cost;
-			int cost;
+	int	cost;
 
 	best_cost = INT_MAX;
 	pos = -1;
@@ -69,20 +25,6 @@ static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
 		i++;
 	}
 	return (pos);
-}
-
-static void	rotate_b_if_needed(t_algo *algo, t_push_ctx *ctx)
-{
-	int	pushed_idx;
-	int	threshold;
-
-	if (algo->b->top > 2)
-	{
-		pushed_idx = algo->b->indices[algo->b->top];
-		threshold = ctx->target + (int)(ctx->chunk_sz * 0.50);
-		if (pushed_idx < threshold)
-			rb(algo);
-	}
 }
 
 static void	push_non_lis_to_b(t_algo *algo, int size)
@@ -114,11 +56,11 @@ static void	push_with_standard_chunking(t_algo *algo, int size)
 	int	chunk_sz;
 	int	target;
 	int	max_to_keep;
-		int i;
-		int pos;
-		int best_cost;
-				int cost;
-			int threshold;
+	int	i;
+	int	pos;
+	int	best_cost;
+	int	cost;
+	int	threshold;
 
 	chunks = get_chunks(size);
 	chunk_sz = size / chunks;
@@ -162,24 +104,11 @@ static void	push_with_standard_chunking(t_algo *algo, int size)
 	}
 }
 
-static void	sort_remaining_in_a(t_algo *algo)
-{
-	if (algo->a->top == 2)
-		sort_three(algo);
-	else if (algo->a->top > 2)
-	{
-		while (algo->a->top > 2)
-			pb(algo);
-		if (algo->a->top == 2)
-			sort_three(algo);
-	}
-}
-
 static void	push_back_simple(t_algo *algo)
 {
-		int mx_p;
-		int mx_v;
-		int i;
+	int	mx_p;
+	int	mx_v;
+	int	i;
 
 	while (algo->b->top >= 0)
 	{
