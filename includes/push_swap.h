@@ -48,6 +48,13 @@ int				binary_search(int *sorted, int size, int target);
 t_cost			find_cheapest_move(t_algo *algo);
 void			execute_move(t_algo *algo, t_cost *cost);
 
+// ***** cost utils *****
+void	calculate_cost_a(t_cost *cost, t_stack *a, int target_pos);
+void	calculate_cost_b(t_cost *cost, t_stack *b, int target_pos);
+int	    optimize_combined_cost(t_cost *cost);
+int	    find_target_pos(int b_idx, t_stack *a);
+
+
 // ***** final_rotate *****
 int				find_min_pos(t_stack *a);
 void			final_rotate_to_min(t_algo *algo);

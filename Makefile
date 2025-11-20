@@ -4,13 +4,14 @@ CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
 INCLUDES	= -I includes -I printf/includes -I printf/libft
 
 SRCS 		=	srcs/main.c \
+				srcs/algo.c \
+				srcs/common/named_operations/named_operations.c srcs/common/named_operations/named_operations2.c srcs/common/named_operations/operations.c srcs/common/compress.c srcs/common/final_rotate.c \
+				srcs/large/chunk.c srcs/large/cost_utils.c srcs/large/cost.c srcs/large/sort_large_stack.c srcs/large/sort_large_utils.c srcs/large/sort_large_utils2.c \
 				srcs/lis/lis_utils.c srcs/lis/lis.c \
-				srcs/named_operations/named_operations.c srcs/named_operations/named_operations2.c srcs/named_operations/operations.c \
+				srcs/medium/insertion.c srcs/medium/sort_medium_stack.c \
 				srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
-				srcs/sort/small_sort.c srcs/sort/sort_large_stack.c srcs/sort/sort_large_utils.c srcs/sort/sort_large_utils2.c srcs/sort/sort_medium_stack.c \
-				srcs/utils/split.c srcs/utils/stack_utils.c srcs/utils/utils.c \
-				srcs/algo.c srcs/chunk.c srcs/compress.c srcs/cost.c \
-				srcs/final_rotate.c srcs/insertion.c 
+				srcs/small/small_sort.c \
+				srcs/utils/split.c srcs/utils/stack_utils.c srcs/utils/utils.c
 
 # Test configuration
 TEST_DIR	= tests

@@ -1,19 +1,4 @@
 # Project TODO
 
 - maths fcts
-
-This file lists functions and files that might be candidates for refactoring based on their size or complexity.
-
-## Files with more than 5 functions:
-
-- `srcs/cost.c` (9 functions)
-- `srcs/lis.c` (7 functions)
-- `srcs/named_operations/named_operations.c` (5 functions)
-- `srcs/named_operations/operations.c` (5 functions)
-- `srcs/parsing.c` (5 functions)
-- `srcs/utils/split.c` (5 functions)
-- `tests/test_lis.c` (14 functions)
-- `tests/test_normalization.c` (7 functions)
-- `tests/test_parsing.c` (10 functions)
-- `tests/test_sorting.c` (9 functions)
-- `tests/test_stack_ops.c` (7 functions)
+- suppress wildcard 
