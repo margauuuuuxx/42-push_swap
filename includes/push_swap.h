@@ -137,6 +137,7 @@ int				find_best_element(t_algo *algo, t_push_ctx *ctx);
 
 // ***** split *****
 char			**ft_split(char const *s, char c);
+void			free_split(char **array);
 
 // ***** t_stack utils *****
 int				init_stack(t_stack *s, int capacity);

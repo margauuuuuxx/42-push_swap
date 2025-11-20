@@ -75,11 +75,15 @@ bool	parse(t_stack *a, t_stack *b, int argc, char **argv)
 {
 	char	**split_str;
 	size_t	capacity;
+	bool	is_split;
+	bool	result;
 
+	is_split = false;
 	if (argc == 2)
 	{
 		split_str = ft_split(argv[1], ' ');
 		capacity = split_len(split_str);
+		is_split = true;
 	}
 	else
 	{
@@ -88,5 +92,8 @@ bool	parse(t_stack *a, t_stack *b, int argc, char **argv)
 	}
 	if (!init_stack(a, capacity) || !init_stack(b, capacity))
 		return (false);
-	return (is_valid(split_str, a, capacity));
+	result = is_valid(split_str, a, capacity);
+	if (is_split)
+		free_split(split_str);
+	return (result);
 }

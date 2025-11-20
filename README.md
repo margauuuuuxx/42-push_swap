@@ -286,13 +286,6 @@ for i in {1..50}; do
 done | awk '{sum+=$1; count++} END {print "Average:", sum/count}'
 ```
 
-### Interactive Testing
-
-**Test with visualization (if you have a visualizer):**
-```bash
-# Generate random numbers and pipe to visualizer
-./push_swap $(shuf -i 1-100 -n 100) | ./visualizer
-```
 
 ## 📂 Project Structure
 
@@ -421,22 +414,3 @@ The program handles:
 
 All errors output `"Error\n"` to stderr and exit with status 1.
 
-## 📚 Resources
-
-- [Push Swap Visualizer](https://github.com/o-reo/push_swap_visualizer)
-- [Algorithm Explanation](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
-- [LIS Algorithm](https://en.wikipedia.org/wiki/Longest_increasing_subsequence)
-
-## 👨‍💻 Author
-
-**marlonco** - 42 School Project
-
----
-
-**Note:** This implementation achieves optimal performance through:
-- **LIS-aware filtering** for large stacks (actively used for >100 elements)
-- **Hybrid push-back strategy** (simple for ≤100, cost-based for >100)
-- **Smart chunking** with threshold-based rotation
-- **Cost-based insertion** with combined rotation optimization
-
-The algorithm consistently achieves operation counts that meet or exceed competitive benchmarks, with an average of ~660 operations for 100 numbers and ~5189 operations for 500 numbers.
