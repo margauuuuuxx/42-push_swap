@@ -48,7 +48,10 @@ void	execute_same_dir(int *remaining_a, int *remaining_b, t_algo *algo,
 {
 	int	combined;
 
-	combined = (*remaining_a < *remaining_b) ? *remaining_a : *remaining_b;
+	if (*remaining_a < *remaining_b)
+		combined = *remaining_a;
+	else
+		combined = *remaining_b;
 	while (combined > 0)
 	{
 		if (cost->dir_a)
@@ -57,8 +60,14 @@ void	execute_same_dir(int *remaining_a, int *remaining_b, t_algo *algo,
 			rrr(algo);
 		combined--;
 	}
-	*remaining_a -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
-	*remaining_b -= (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
+	if (cost->cost_a < cost->cost_b)
+		*remaining_a -= cost->cost_a;
+	else
+		*remaining_a -= cost->cost_b;
+	if (cost->cost_a < cost->cost_b)
+		*remaining_b -= cost->cost_a;
+	else
+		*remaining_b -= cost->cost_b;
 }
 
 static void	execute_rotations_a(int remaining_a, t_algo *algo, bool dir_a)

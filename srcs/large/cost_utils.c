@@ -59,10 +59,14 @@ int	optimize_combined_cost(t_cost *cost)
 
 	if (cost->dir_a == cost->dir_b)
 	{
-		combined = (cost->cost_a < cost->cost_b) ? cost->cost_a : cost->cost_b;
-		remaining = (cost->cost_a > cost->cost_b) 
-					? (cost->cost_a - cost->cost_b) 
-					: (cost->cost_b - cost->cost_a);
+		if (cost->cost_a < cost->cost_b)
+			combined = cost->cost_a;
+		else
+			combined = cost->cost_b;
+		if (cost->cost_a > cost->cost_b)
+			remaining = cost->cost_a - cost->cost_b;
+		else
+			remaining = cost->cost_b - cost->cost_a;
 		return (combined + remaining + 1);
 	}
 	return (cost->cost_a + cost->cost_b + 1);
