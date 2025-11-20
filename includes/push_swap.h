@@ -31,8 +31,9 @@ void			smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
 void			sort(t_algo *algo);
 void			sort_large_stack(t_algo *algo);
 
-// ***** algo *****
+// ***** alone *****
 t_cost			calculate_move_cost(t_algo *algo, int b_idx);
+void			free_split(char **array);
 
 // ***** chunk *****
 void			free_chunk_array(t_chunk_array *chunks);
@@ -137,7 +138,6 @@ int				find_best_element(t_algo *algo, t_push_ctx *ctx);
 
 // ***** split *****
 char			**ft_split(char const *s, char c);
-void			free_split(char **array);
 
 // ***** t_stack utils *****
 int				init_stack(t_stack *s, int capacity);
