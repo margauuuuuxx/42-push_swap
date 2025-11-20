@@ -24,10 +24,12 @@ void	free_chunk_array(t_chunk_array *chunks)
 int	calculate_chunk_count(int elements)
 {
 	int	optimal_chunks;
+	int root;
 
 	if (elements <= 3)
 		return (1);
-	optimal_chunks = (int)(sqrt(elements) * 1.2);
+	root = int_sqrt(elements);
+	optimal_chunks = (int)(root * 1.2);
 	if (optimal_chunks < 3)
 		optimal_chunks = 3;
 	return (optimal_chunks);

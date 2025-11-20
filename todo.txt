@@ -1,4 +1,3 @@
 # Project TODO
 
 - maths fcts
-- suppress wildcard 

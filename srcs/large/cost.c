@@ -12,19 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-t_cost	calculate_move_cost(t_algo *algo, int b_idx)
-{
-	t_cost	cost;
-	int		target_pos;
-
-	cost.b_idx = b_idx;
-	target_pos = find_target_pos(algo->b->indices[b_idx], algo->a);
-	calculate_cost_b(&cost, algo->b, target_pos);
-	calculate_cost_a(&cost, algo->a, target_pos);
-	cost.total = optimize_combined_cost(&cost);
-	return (cost);
-}
-
 t_cost	find_cheapest_move(t_algo *algo)
 {
 	t_cost	cheapest;

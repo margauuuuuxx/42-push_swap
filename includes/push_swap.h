@@ -14,7 +14,6 @@
 
 #include "structs.h"
 #include <limits.h>
-#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +31,9 @@ void			rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
 void			smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
 void			sort(t_algo *algo);
 void			sort_large_stack(t_algo *algo);
+
+// ***** algo *****
+t_cost	        calculate_move_cost(t_algo *algo, int b_idx);
 
 // ***** chunk *****
 void			free_chunk_array(t_chunk_array *chunks);
@@ -146,7 +148,6 @@ int				init_stack(t_stack *s, int capacity);
 int				ft_atoi(const char *str);
 size_t			ft_strlen(char *str);
 void			output_message(char *str);
-void			print_t_stack(t_stack *s);
 void			copy_stack(int *cpy, t_stack *a);
+int             int_sqrt(int n);
 
-void			turk_sort(t_algo *algo);

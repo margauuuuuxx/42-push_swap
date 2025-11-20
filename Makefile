@@ -1,12 +1,12 @@
 NAME		= push_swap
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -DDEBUG_MODE
-INCLUDES	= -I includes -I printf/includes -I printf/libft
+CFLAGS		= -Wall -Wextra -Werror
+INCLUDES	= -I includes
 
 SRCS 		=	srcs/main.c \
 				srcs/algo.c \
 				srcs/common/named_operations/named_operations.c srcs/common/named_operations/named_operations2.c srcs/common/named_operations/operations.c srcs/common/compress.c srcs/common/final_rotate.c \
-				srcs/large/chunk.c srcs/large/cost_utils.c srcs/large/cost.c srcs/large/sort_large_stack.c srcs/large/sort_large_utils.c srcs/large/sort_large_utils2.c \
+				srcs/large/alone.c srcs/large/chunk.c srcs/large/cost_utils.c srcs/large/cost.c srcs/large/sort_large_stack.c srcs/large/sort_large_utils.c srcs/large/sort_large_utils2.c \
 				srcs/lis/lis_utils.c srcs/lis/lis.c \
 				srcs/medium/insertion.c srcs/medium/sort_medium_stack.c \
 				srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo -e "Compiling push_swap..."
-	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -lm -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo -e "\033[32mDone!\033[0m"
 
 $(OBJDIR)/%.o: %.c
