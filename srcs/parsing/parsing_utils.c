@@ -42,22 +42,28 @@ static bool	no_duplicates(t_stack *s)
 	return (true);
 }
 
-static void	fill_stack(char **str, t_stack *s, size_t len)
+static bool	fill_stack(char **str, t_stack *s, size_t len)
 {
-	int	i;
+	int			i;
+	long long	nbr;
 
 	i = (int)len - 1;
 	while (i >= 0)
 	{
-		push_element(s, ft_atoi(str[i]));
+		nbr = ft_atoi(str[i]);
+		if (nbr > INT_MAX || nbr < INT_MIN)
+			return (false);
+		push_element(s, (int)nbr);
 		i--;
 	}
+	return (true);
 }
 
 bool	is_valid(char **str, t_stack *s, size_t len)
 {
 	if (!validate_all_strings(str, len))
 		return (false);
-	fill_stack(str, s, len);
+	if (!fill_stack(str, s, len))
+		return (false);
 	return (no_duplicates(s));
 }

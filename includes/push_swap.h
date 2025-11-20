@@ -143,7 +143,7 @@ char			**ft_split(char const *s, char c);
 int				init_stack(t_stack *s, int capacity);
 
 // ***** utils *****
-int				ft_atoi(const char *str);
+long long		ft_atoi(const char *str);
 size_t			ft_strlen(char *str);
 void			output_message(char *str);
 void			copy_stack(int *cpy, t_stack *a);

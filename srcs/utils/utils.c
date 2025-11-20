@@ -12,11 +12,11 @@
 
 #include "../../includes/push_swap.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	int	i;
-	int	is_neg;
-	int	res;
+	int			i;
+	int			is_neg;
+	long long	res;
 
 	i = 0;
 	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\f'
@@ -32,8 +32,6 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i++] - '0');
-		if (sizeof(res) >= sizeof(long long))
-			return (-1);
 	}
 	return (res * is_neg);
 }
