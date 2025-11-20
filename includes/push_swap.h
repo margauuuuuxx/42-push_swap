@@ -54,6 +54,7 @@ void			final_rotate_to_min(t_algo *algo);
 
 // ***** insertion *****
 void			push_back_to_a(t_algo *algo);
+void        	push_back_simple(t_algo *algo);
 
 // ***** lis *****
 void			compute_lis(t_lis *lis, int *indices, int size);
@@ -108,19 +109,25 @@ bool			is_sorted(t_stack *s);
 void			sort_three(t_algo *algo);
 void			sort_five(t_algo *algo);
 
-// ***** sort small stack *****
+// ***** sort medium stack *****
 int				find_index_pos(t_stack *s, int target_idx);
 void			push_to_b_optimized(t_algo *algo, int pos);
-void			sort_small_stack(t_algo *algo);
-
-// ***** sort large stack *****
 void			sort_medium_stack(t_algo *algo);
 
+// ***** sort large stack *****
+void			sort_large_stack(t_algo *algo);
+
 // ***** sort large utils *****
-int	            get_chunks(int size);
+void	        init_chunk_ctx(t_chunk_ctx *ctx, int size);
 void	        init_push_ctx(t_push_ctx *ctx, int size);
+int	            get_chunks(int size);
 void	        sort_remaining_in_a(t_algo *algo);
 void            rotate_b_if_needed(t_algo *algo, t_push_ctx *ctx);
+
+// ***** sort large utils 2 *****
+void	smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c);
+int	    calculate_cost(t_algo *algo, int i);
+int	    find_best_element(t_algo *algo, t_push_ctx *ctx);
 
 // ***** split *****
 char			**ft_split(char const *s, char c);

@@ -12,13 +12,12 @@
 
 #include "../../includes/push_swap.h"
 
-int	get_chunks(int size)
+void	init_chunk_ctx(t_chunk_ctx *ctx, int size)
 {
-	if (size <= 100)
-		return (5);
-	if (size <= 500)
-		return (9);
-	return (20);
+	ctx->chunks = get_chunks(size);
+	ctx->chunk_sz = size / ctx->chunks;
+	ctx->target = 0;
+	ctx->max_to_keep = size - 3;
 }
 
 void	init_push_ctx(t_push_ctx *ctx, int size)
@@ -28,6 +27,15 @@ void	init_push_ctx(t_push_ctx *ctx, int size)
 	ctx->target = 0;
 	ctx->pushed_count = 0;
 	ctx->target_push_count = size - 3;
+}
+
+int	get_chunks(int size)
+{
+	if (size <= 100)
+		return (5);
+	if (size <= 500)
+		return (9);
+	return (20);
 }
 
 void	sort_remaining_in_a(t_algo *algo)
@@ -55,41 +63,4 @@ void	rotate_b_if_needed(t_algo *algo, t_push_ctx *ctx)
 		if (pushed_idx < threshold)
 			rb(algo);
 	}
-}
-
-static void	rotate_forward(t_algo *algo, char c, int count)
-{
-	while (count-- > 0)
-	{
-		if (c == 'a')
-			ra(algo);
-		else
-			rb(algo);
-	}
-}
-
-static void	rotate_backward(t_algo *algo, char c, int count)
-{
-	while (count-- > 0)
-	{
-		if (c == 'a')
-			rra(algo);
-		else
-			rrb(algo);
-	}
-}
-
-void	smart_rotate_to_top(t_stack *s, int pos, t_algo *algo, char c)
-{
-	int	cf;
-	int	cb;
-
-	cf = s->top - pos;
-	cb = pos + 1;
-	if (pos == s->top)
-		return ;
-	if (cf <= cb)
-		rotate_forward(algo, c, cf);
-	else
-		rotate_backward(algo, c, cb);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small_stack.c                                 :+:      :+:    :+:   */
+/*   sort_medium_stack.c                                 :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marlonco <marlonco@students.s19.be>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -67,7 +67,7 @@ static void	simple_sort_remaining(t_algo *algo)
 		sort_three(algo);
 }
 
-void	sort_small_stack(t_algo *algo)
+void	sort_medium_stack(t_algo *algo)
 {
 	int	size;
 	int	i;

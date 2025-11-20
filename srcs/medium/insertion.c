@@ -28,3 +28,29 @@ void	push_back_to_a(t_algo *algo)
 	insert_all_from_b(algo);
 	final_rotate_to_min(algo);
 }
+
+void	push_back_simple(t_algo *algo)
+{
+	int	mx_p;
+	int	mx_v;
+	int	i;
+
+	while (algo->b->top >= 0)
+	{
+		mx_p = 0;
+		mx_v = algo->b->indices[0];
+		i = 1;
+		while (i <= algo->b->top)
+		{
+			if (algo->b->indices[i] > mx_v)
+			{
+				mx_v = algo->b->indices[i];
+				mx_p = i;
+			}
+			i++;
+		}
+		smart_rotate_to_top(algo->b, mx_p, algo, 'b');
+		pa(algo);
+	}
+	final_rotate_to_min(algo);
+}

@@ -89,8 +89,8 @@ void	sort(t_algo *algo)
 	}
 	if (size <= 20)
 	{
-		sort_small_stack(algo);
+		sort_medium_stack(algo);
 		return ;
 	}
-	sort_medium_stack(algo);
+	sort_large_stack(algo);
 }

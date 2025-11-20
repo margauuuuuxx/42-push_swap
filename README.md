@@ -56,7 +56,7 @@ Move:  [4, 5, 6]     ← Only move these to B
   - LIS elements stay in A (already in correct order!)
   - Reduces operations by ~30-40%
 
-**Implementation:** `lis.c` (calculation) and `sort_medium_stack.c` (usage)
+**Implementation:** `lis.c` (calculation) and `sort_large_stack.c` (usage)
 
 ### 3. Chunking Heuristic
 
@@ -312,8 +312,8 @@ push_swap/
 │   ├── main.c               # Entry point
 │   ├── parsing.c            # Input validation and parsing
 │   ├── small_sort.c         # Optimized sorting for ≤5 elements
-│   ├── sort_medium_stack.c  # Medium-large stack sorting (>20)
-│   ├── sort_small_stack.c   # Small stack sorting (6-20)
+│   ├── sort_large_stack.c  # Medium-large stack sorting (>20)
+│   ├── sort_medium_stack.c   # Small stack sorting (6-20)
 │   ├── named_operations/
 │   │   ├── named_operations.c  # High-level operations (pa, pb, etc.)
 │   │   └── operations.c        # Low-level stack operations

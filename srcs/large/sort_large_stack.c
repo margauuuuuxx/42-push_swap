@@ -12,45 +12,6 @@
 
 #include "../../includes/push_swap.h"
 
-static int	calculate_cost(t_algo *algo, int i)
-{
-	int	cost_forward;
-	int	cost_backward;
-
-	cost_forward = algo->a->top - i;
-	cost_backward = i + 1;
-	if (cost_forward < cost_backward)
-		return (cost_forward);
-	return (cost_backward);
-}
-
-static int	find_best_element(t_algo *algo, t_push_ctx *ctx)
-{
-	int	i;
-	int	pos;
-	int	best_cost;
-	int	cost;
-
-	best_cost = INT_MAX;
-	pos = -1;
-	i = 0;
-	while (i <= algo->a->top)
-	{
-		if (!algo->a->in_lis[i] && algo->a->indices[i] >= ctx->target
-			&& algo->a->indices[i] < ctx->target + ctx->chunk_sz)
-		{
-			cost = calculate_cost(algo, i);
-			if (cost < best_cost)
-			{
-				best_cost = cost;
-				pos = i;
-			}
-		}
-		i++;
-	}
-	return (pos);
-}
-
 static void	push_non_lis_to_b(t_algo *algo, int size)
 {
 	t_push_ctx	ctx;
@@ -72,14 +33,6 @@ static void	push_non_lis_to_b(t_algo *algo, int size)
 		ctx.pushed_count++;
 		rotate_b_if_needed(algo, &ctx);
 	}
-}
-
-static void	init_chunk_ctx(t_chunk_ctx *ctx, int size)
-{
-	ctx->chunks = get_chunks(size);
-	ctx->chunk_sz = size / ctx->chunks;
-	ctx->target = 0;
-	ctx->max_to_keep = size - 3;
 }
 
 static int	find_best_in_chunk(t_algo *algo, t_chunk_ctx *ctx)
@@ -144,33 +97,7 @@ static void	push_with_standard_chunking(t_algo *algo, int size)
 	}
 }
 
-static void	push_back_simple(t_algo *algo)
-{
-	int	mx_p;
-	int	mx_v;
-	int	i;
-
-	while (algo->b->top >= 0)
-	{
-		mx_p = 0;
-		mx_v = algo->b->indices[0];
-		i = 1;
-		while (i <= algo->b->top)
-		{
-			if (algo->b->indices[i] > mx_v)
-			{
-				mx_v = algo->b->indices[i];
-				mx_p = i;
-			}
-			i++;
-		}
-		smart_rotate_to_top(algo->b, mx_p, algo, 'b');
-		pa(algo);
-	}
-	final_rotate_to_min(algo);
-}
-
-void	sort_medium_stack(t_algo *algo)
+void	sort_large_stack(t_algo *algo)
 {
 	int	size;
 

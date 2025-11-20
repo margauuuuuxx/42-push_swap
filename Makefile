@@ -7,7 +7,7 @@ SRCS 		=	srcs/main.c \
 				srcs/lis/lis_utils.c srcs/lis/lis.c \
 				srcs/named_operations/named_operations.c srcs/named_operations/named_operations2.c srcs/named_operations/operations.c \
 				srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
-				srcs/sort/small_sort.c srcs/sort/sort_large_stack.c srcs/sort/sort_large_utils.c srcs/sort/sort_small_stack.c \
+				srcs/sort/small_sort.c srcs/sort/sort_large_stack.c srcs/sort/sort_large_utils.c srcs/sort/sort_large_utils2.c srcs/sort/sort_medium_stack.c \
 				srcs/utils/split.c srcs/utils/stack_utils.c srcs/utils/utils.c \
 				srcs/algo.c srcs/chunk.c srcs/compress.c srcs/cost.c \
 				srcs/final_rotate.c srcs/insertion.c 
@@ -19,11 +19,6 @@ TEST_SRCS	= $(wildcard $(TEST_DIR)/test_*.c)
 TEST_BINS	= $(TEST_SRCS:$(TEST_DIR)/%.c=$(TEST_DIR)/%)
 TEST_OBJS	= $(filter-out $(OBJDIR)/srcs/main.o, $(OBJS))
 
-# NAME_BONUS      = checker
-# SRCS_BONUS      = srcs/checker/main_bonus.c \
-#                   srcs/checker/reader_bonus.c
-# OBJS_BONUS      = $(SRCS_BONUS:%.c=$(OBJDIR)/%.o)
-
 OBJDIR 		= objects
 OBJS		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
@@ -33,11 +28,6 @@ $(NAME): $(OBJS)
 	@echo -e "Compiling push_swap..."
 	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -lm -o $(NAME)
 	@echo -e "\033[32mDone!\033[0m"
-
-# bonus: $(PRINTF_LIB) $(OBJS_BONUS) $(OBJS_COMMON)
-# 	@echo -e "\033[32mCompiling checker... \033[0m"
-# 	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(OBJS_COMMON) $(PRINTF_LIB) -o $(NAME_BONUS)
-# 	@echo -e "\033[32mDone!\033[0m"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
