@@ -296,29 +296,53 @@ push_swap/
 │   └── structs.h            # Data structure definitions
 ├── srcs/
 │   ├── algo.c               # Main algorithm logic and initialization
-│   ├── chunk.c              # Chunk creation and management
-│   ├── compress.c           # Coordinate normalization
-│   ├── cost.c               # Cost calculation for optimal moves
-│   ├── final_rotate.c       # Final rotation to sort position
-│   ├── insertion.c          # Push-back insertion strategy
-│   ├── lis.c                # Longest Increasing Subsequence
+│   ├── common/
+│   │   ├── compress.c           # Coordinate normalization
+│   │   ├── final_rotate.c       # Final rotation to sort position
+│   │   └── named_operations/
+│   │       ├── named_operations.c  # High-level operations (pa, pb, etc.)
+│   │       ├── named_operations2.c # Additional named operations
+│   │       └── operations.c        # Low-level stack operations
+│   ├── large/
+│   │   ├── alone.c              # Logic for single elements
+│   │   ├── chunk.c              # Chunk creation and management
+│   │   ├── cost.c               # Cost calculation for optimal moves
+│   │   ├── cost_utils.c         # Utilities for cost calculation
+│   │   ├── sort_large_stack.c  # Large stack sorting logic
+│   │   ├── sort_large_utils.c  # Utilities for large stack sorting
+│   │   └── sort_large_utils2.c # More utilities for large stack sorting
+│   ├── lis/
+│   │   ├── lis.c                # Longest Increasing Subsequence
+│   │   └── lis_utils.c          # Utilities for LIS
 │   ├── main.c               # Entry point
-│   ├── parsing.c            # Input validation and parsing
-│   ├── small_sort.c         # Optimized sorting for ≤5 elements
-│   ├── sort_large_stack.c  # Medium-large stack sorting (>20)
-│   ├── sort_medium_stack.c   # Small stack sorting (6-20)
-│   ├── named_operations/
-│   │   ├── named_operations.c  # High-level operations (pa, pb, etc.)
-│   │   └── operations.c        # Low-level stack operations
+│   ├── medium/
+│   │   ├── insertion.c          # Insertion sort for medium stacks
+│   │   └── sort_medium_stack.c   # Medium stack sorting logic
+│   ├── parsing/
+│   │   ├── parsing.c            # Input validation and parsing
+│   │   └── parsing_utils.c      # Utilities for parsing
+│   ├── small/
+│   │   └── small_sort.c         # Optimized sorting for ≤5 elements
 │   └── utils/
 │       ├── split.c          # String splitting utility
 │       ├── stack_utils.c    # Stack management functions
 │       └── utils.c          # General utilities (atoi, strlen, etc.)
 ├── testers/
-│   └── checker_linux        # Validation tool
+│   ├── checker_linux        # Validation tool for Linux
+│   └── checker_Mac          # Validation tool for MacOS
 ├── Makefile
-└── README.md
-```
+├── push_swap
+├── README.md
+└── tests/
+    ├── README.md
+    ├── run_all_tests.sh
+    ├── test_framework.h
+    ├── test_lis.c
+    ├── test_normalization.c
+    ├── test_parsing.c
+    ├── test_sorting.c
+    └── test_stack_ops.c
+
 
 ## 🎓 Algorithm Complexity
 

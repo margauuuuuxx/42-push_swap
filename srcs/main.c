@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	if (!parse(&a, &b, argc, argv))
-		return (output_message("Error: Invalid character in argument ...\n"),
+		return (output_message("Error\n"),
 			1);
 	compress(&a);
 	if (is_sorted(&a))
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	}
 	calculate_lis(&a);
 	if (init_algo(&algo, &a, &b))
-		return (output_message("Error: Init algo\n"), 1);
+		return (output_message("Error\n"), 1);
 	sort(&algo);
 	free_chunk_array(algo.chunks);
 	free_stack(&a);
