@@ -72,7 +72,7 @@ void	copy_stack(int *cpy, t_stack *a)
 int	int_sqrt(int n)
 {
 	int	x;
-	
+
 	x = 0;
 	while ((x + 1) * (x + 1) <= n)
 		x++;

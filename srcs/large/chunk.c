@@ -17,14 +17,14 @@ void	free_chunk_array(t_chunk_array *chunks)
 	if (!chunks)
 		return ;
 	if (chunks->chunks)
-		free(chunks->chunks); // CHECK WHY NOT CHUNKS[I]
+		free(chunks->chunks);
 	free(chunks);
 }
 
 int	calculate_chunk_count(int elements)
 {
 	int	optimal_chunks;
-	int root;
+	int	root;
 
 	if (elements <= 3)
 		return (1);
