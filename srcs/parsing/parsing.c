@@ -93,6 +93,8 @@ bool	parse(t_stack *a, t_stack *b, int argc, char **argv)
 	if (!init_stack(a, capacity) || !init_stack(b, capacity))
 		return (false);
 	result = is_valid(split_str, a, capacity);
+	if (!result)
+		free_both_stacks(a, b);
 	if (is_split)
 		free_split(split_str);
 	return (result);

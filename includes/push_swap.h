@@ -109,6 +109,7 @@ bool			parse(t_stack *a, t_stack *b, int argc, char **argv);
 
 // ***** t_stack utils *****
 int				init_stack(t_stack *s, int capacity);
+void            free_both_stacks(t_stack *a, t_stack *b);
 void			free_stack(t_stack *s);
 
 // ***** small sort *****

@@ -22,6 +22,12 @@ void	free_stack(t_stack *s)
 		free(s->in_lis);
 }
 
+void	free_both_stacks(t_stack *a, t_stack *b)
+{
+	free_stack(a);
+	free_stack(b);
+}
+
 int	init_stack(t_stack *s, int capacity)
 {
 	int	i;
