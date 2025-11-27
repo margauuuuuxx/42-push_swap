@@ -109,13 +109,11 @@ bool			parse(t_stack *a, t_stack *b, int argc, char **argv);
 
 // ***** t_stack utils *****
 int				init_stack(t_stack *s, int capacity);
-void            free_both_stacks(t_stack *a, t_stack *b);
-void			free_stack(t_stack *s);
+void			free_both_stacks(t_stack *a, t_stack *b);
 
 // ***** small sort *****
 bool			is_sorted(t_stack *s);
 void			sort_three(t_algo *algo);
-void			sort_five(t_algo *algo);
 
 // ***** sort medium stack *****
 int				find_index_pos(t_stack *s, int target_idx);

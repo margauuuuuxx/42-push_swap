@@ -54,23 +54,3 @@ void	sort_three(t_algo *algo)
 	else if (top < mid && mid > bottom && top > bottom)
 		rra(algo);
 }
-
-void	sort_five(t_algo *algo)
-{
-	int	min_pos;
-
-	if (is_sorted(algo->a))
-		return ;
-	while (algo->b->top < 1)
-	{
-		min_pos = find_min_pos(algo->a);
-		rotate_to_top(algo->a, min_pos, algo, 'a');
-		pb(algo);
-	}
-	sort_three(algo);
-	pa(algo);
-	pa(algo);
-	if (algo->b->top >= 0
-		&& algo->b->values[algo->b->top] < algo->b->values[algo->b->top - 1])
-		sb(algo);
-}

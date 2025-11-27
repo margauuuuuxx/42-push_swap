@@ -19,8 +19,7 @@ int	init_algo(t_algo *algo, t_stack *a, t_stack *b)
 	algo->chunks = create_chunk(a);
 	if (!algo->chunks)
 	{
-		free_stack(a);
-		free_stack(b);
+		free_both_stacks(a, b);
 		return (1);
 	}
 	return (0);
@@ -80,11 +79,6 @@ void	sort(t_algo *algo)
 	if (size == 3)
 	{
 		sort_three(algo);
-		return ;
-	}
-	if (size <= 5)
-	{
-		sort_five(algo);
 		return ;
 	}
 	if (size <= 20)

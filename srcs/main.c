@@ -26,8 +26,7 @@ int	main(int argc, char **argv)
 	compress(&a);
 	if (is_sorted(&a))
 	{
-		free_stack(&a);
-		free_stack(&b);
+		free_both_stacks(&a, &b);
 		return (0);
 	}
 	calculate_lis(&a);
@@ -35,7 +34,6 @@ int	main(int argc, char **argv)
 		return (output_message("Error\n"), 1);
 	sort(&algo);
 	free_chunk_array(algo.chunks);
-	free_stack(&a);
-	free_stack(&b);
+	free_both_stacks(&a, &b);
 	return (0);
 }
